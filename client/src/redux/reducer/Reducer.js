@@ -3,8 +3,10 @@ import {
     GET_VIDEO_GAMES,
     GET_BY_NAME,
     GET_PLATFORMS,
+    GET_BY_ID,
     BY_FILTER,
-    BY_GENRE
+    BY_GENRE,
+    BY_ALL_PLATF
 } from '../actions/action-types'
 
 
@@ -14,6 +16,7 @@ const initialState = {
     allGenres:[],
     allPlatforms:[],
     byName:[],
+    byPlatf: [],
     byId:{},
 
 }
@@ -21,10 +24,15 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VIDEO_GAMES:
+            let platforms = action.payload
+            platforms = platforms.map(el => el.platforms).flat()
+            platforms = [...new Set(platforms.sort())]
+            platforms = platforms.map(el => {return {name : el}})
             return {
                 ...state,
                 allGames: action.payload,
-                filterby: action.payload
+                filterby: action.payload,
+                byPlatf: platforms  
             }
         case GET_GENRES:
             return {
@@ -39,8 +47,13 @@ const rootReducer = (state = initialState, action) => {
         case GET_PLATFORMS:
             return{
                 ...state,
-                allPlatforms: action.payload
+                allPlatforms: action.payload,
             }
+        case GET_BY_ID: 
+            return {
+                ...state,
+                byId: action.payload
+        }
         case BY_FILTER:
             switch (action.payload) {
                 case 'all':
@@ -58,7 +71,6 @@ const rootReducer = (state = initialState, action) => {
                             return -1;
                         }else return 0;
                     })
-                    console.log(statusFilterbyAZ);
                     return {
                         ...state,
                         allGames:statusFilterbyAZ
@@ -72,7 +84,6 @@ const rootReducer = (state = initialState, action) => {
                             return -1;
                         }else return 0;
                     })
-                    console.log(statusFilterbyZA);
                     return {
                         ...state,
                         allGames:statusFilterbyZA
@@ -100,10 +111,16 @@ const rootReducer = (state = initialState, action) => {
         case BY_GENRE:
             let byGenres = state.filterby
             let genreByName = byGenres.filter( g => g.Genres ? g.Genres.includes(`${action.payload}`): null)
-            console.log(genreByName);
             return {
                 ...state,
                 allGames: genreByName
+            }
+        case BY_ALL_PLATF:
+            const byPlatf = state.allGames//.map(el => el.platforms)
+
+            return {
+                ...state,
+                byPlatf: byPlatf
             }
         default:
             return {

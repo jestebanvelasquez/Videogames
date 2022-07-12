@@ -5,7 +5,8 @@ import {
     GET_PLATFORMS,
     GET_BY_ID,
     BY_FILTER,
-    BY_GENRE
+    BY_GENRE,
+    BY_ALL_PLATF
 } from './action-types'
 
 export const getAllGames = () => dispatch =>{
@@ -55,23 +56,37 @@ export const getAllPlatforms = () => dispatch => {
                 })
 }
 
+export const getDetailGame = () => dispatch => {
+    return fetch('http://localhost:3002/platforms')
+                .then(r => r.json())
+                .then(json => {
+                    dispatch({
+                        type: GET_BY_ID,
+                        payload: json.data
+                    })
+                })
+}
+
 
 export const byFilter = (payload) => dispatch =>{
-    // return {
         dispatch({
             type: BY_FILTER,
             payload: payload
         })
-    // }
 }
 
 export const byGenre = (payload) => dispatch =>{
-    // return {
         dispatch({
             type: BY_GENRE,
             payload: payload
         })
-    // }
+}
+
+export const byAllPlatf = () => dispatch =>{
+        dispatch({
+            type: BY_ALL_PLATF,
+            payload: 'BY_ALL_PLATF'
+        })
 }
 
 

@@ -7,15 +7,16 @@ export default function VideoGames() {
     const allGames = useSelector(state => state.allGames);
     const [state, setState] = useState(allGames);
     const [games, setGames] = useState([...state].splice(0, gamesxPage));
+    const [page, setPage] = useState(0);
     
     useEffect(()=>{
         setState(allGames)
         setGames([...state].splice(0, gamesxPage))
-    },[allGames, state])
+        setPage(0)
+    },[allGames, state,])
 
     //Paginacion:
 
-    const [page, setPage] = useState(0);
     const allpages = Math.round(state.length  / 15)
     const nextHandler = () =>{
         const vGames = Math.round(state.length / 15)
@@ -34,6 +35,7 @@ export default function VideoGames() {
         setGames([...state].splice(index, gamesxPage))
         setPage(prevPage)
     }
+
 
 
     return <Pagination games={games} prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages}  />

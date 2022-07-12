@@ -23,7 +23,7 @@ function App() {
       <Route exact  path='/home/created' component={Created}/>
 
       <Route exact  path='/home/name' component={ByName}/>
-      {/* <Route exact path='/home/database' component={DataBase}/> */}
+      <Route exact path='/home/database' component={DataBase}/>
       
       {/* <LandigPage/> */}
     </div>
