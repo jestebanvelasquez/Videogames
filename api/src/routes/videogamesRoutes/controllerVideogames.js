@@ -13,8 +13,9 @@ const postGame = async (name, description, released, rating, image, platforms, g
         released,
         rating,
         image,
-        platforms
+        // platforms
     })
+    await newGame.addPlatforms(platforms)
     await newGame.addGenres(genres)
     return newGame //'created!'
 }

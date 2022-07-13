@@ -1,73 +1,86 @@
 import React, { useEffect, useState } from 'react'
 import './formhenry.css';
 
-export default function Formulario(props) {
+export default function Formulario({handleSubmit, input, errors, handleChange, }) {
 
-    const [state, setState] = useState(props)
-
-
-useEffect(() =>{
-    setState(props)
-},[props])
-
-
-  return (
-    <div>Formulario
-
-<form onSubmit={(e) => state.handleSubmit (e)}>
-
-
-{/* ---------------------- inputs ---------------------- */}
-    <div>
-        <p htmlFor="name">name </p>
-            <input
-                splaceholder='name..'
-                // className={props.errors.name && 'danger' }
-                type="text" 
-                name='name'
-                value={state.input.name}
-                onChange={state.handleChange}
-            />
-            {state.errors && state.errors.name ?  <p className='danger'> {state.errors.name} </p> : null}
-    </div>
-
-    <div>
-        <p htmlFor="description"> description:</p>
-        <textarea
-            name='description'
-            value={state.input.description}
-            onChange={state.handleChange}
-            />
-        {state.errors && state.errors.description ?  <p className='danger'> {state.errors.description} </p> : null}
-        
-
-    </div>
-
-    <div>
-        <p htmlFor="released"> released:</p>
-        <input 
-            type="date" 
-            name='released'
-            value={state.input.released}
-            onChange={state.handleChange}
-            />
-        {state.errors && state.errors.released ?  <p className='danger'> {state.errors.released} </p> : null}
-
-    </div>
-
-    <div>
-        <p htmlFor="rating"> rating:</p>
-        <input 
-            type="string" 
-            name='rating'
-            value={state.input.rating}
-            onChange={state.handleChange}
-            />
-        {state.errors && state.errors.rating ?  <p className='danger'> {state.errors.rating} </p> : null}
-
-    </div>
-</form>
     
-    </div>
-  )
+
+
+
+
+
+    return (
+        <div>Formulario
+
+            <form onSubmit={(e) => handleSubmit(e)}>
+
+
+                {/* ---------------------- inputs ---------------------- */}
+
+                {/* ---------------------------------- images entry ----------------------------------------------*/}
+
+                <div>
+                    <p>agrega la url de la imagen </p>
+                    <input
+                        type='text'
+                        name='image'
+                        value={input.image}
+                        onChange={(e) => handleChange(e)}
+                    />
+                </div>
+
+
+                <div>
+                    <p htmlFor="name">name </p>
+                    <input
+                        splaceholder='name..'
+                        // className={props.errors.name && 'danger' }
+                        type="text"
+                        name='name'
+                        value={input.name}
+                        onChange={handleChange}
+                    />
+                    {errors && errors.name ? <p className='danger'> {errors.name} </p> : null}
+                </div>
+
+                <div>
+                    <p htmlFor="description"> description:</p>
+                    <textarea
+                        name='description'
+                        value={input.description}
+                        onChange={handleChange}
+                    />
+                    {errors && errors.description ? <p className='danger'> {errors.description} </p> : null}
+                </div>
+
+                <div>
+                    <p htmlFor="released"> released:</p>
+                    <input
+                        type="date"
+                        name='released'
+                        value={input.released}
+                        onChange={handleChange}
+                    />
+                    {errors && errors.released ? <p className='danger'> {errors.released} </p> : null}
+
+                </div>
+
+                <div>
+                    <p htmlFor="rating"> rating:</p>
+                    <input
+                        type="string"
+                        name='rating'
+                        value={input.rating}
+                        onChange={handleChange}
+                    />
+                    {errors && errors.rating ? <p className='danger'> {errors.rating} </p> : null}
+                </div>
+
+                <div>
+                    <input type='submit' disabled={Object.keys(errors).length === 0 ? false : true} />
+                </div>
+            </form>
+
+        </div>
+    )
 }

@@ -10,9 +10,12 @@ const  {
 
 }  = require("./controllerVideogames");
 
+
+
+
 //Routes:
 
-//-----------------------------http://localhost:3001/videogames----------------------------
+//-----------------------------http://localhost:3002/videogames----------------------------
 // {
 //     "name":"grand",
 //     "description":"para jugar cada dia jeje ",

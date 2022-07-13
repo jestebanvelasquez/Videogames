@@ -1,5 +1,5 @@
 export const Validate = (state) => {
-    
+    console.log(state)
     let errors = {};
 
     //------------------------ ValidacionName: --------------------
