@@ -17,7 +17,7 @@ export default function Detail(props) {
         <h6>{props.description}</h6>
         <h3>{props.released}</h3>
         <h3>{props.rating}</h3>
-        {props.platforms.map(el =>  {
+        {/* {props.platforms.map(el =>  {
             return( 
                 <ul>
                     <li>
@@ -25,7 +25,9 @@ export default function Detail(props) {
                     </li>
                 </ul>
                 )
-        })}
+        })} */}
+        <h3>{props.platforms}</h3>
+
         <h3>{props.genres}</h3>
         <button onClick={props.reset}>reset game</button>
 

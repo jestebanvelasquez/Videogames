@@ -1,50 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import './formhenry.css';
 
 export default function Formulario(props) {
+
+    const [state, setState] = useState(props)
+
+
+useEffect(() =>{
+    setState(props)
+},[props])
+
+
   return (
     <div>Formulario
 
-<form onSubmit={(e) => props.handleSubmit (e)}>
+<form onSubmit={(e) => state.handleSubmit (e)}>
 
 
 {/* ---------------------- inputs ---------------------- */}
     <div>
-        <label htmlFor="name"> name:</label>
-        <input 
-            type="text" 
-            name='name'
-            value={props.input.name}
-            onChange={props.handleChange}
+        <p htmlFor="name">name </p>
+            <input
+                splaceholder='name..'
+                // className={props.errors.name && 'danger' }
+                type="text" 
+                name='name'
+                value={state.input.name}
+                onChange={state.handleChange}
             />
+            {state.errors && state.errors.name ?  <p className='danger'> {state.errors.name} </p> : null}
     </div>
 
     <div>
-        <label htmlFor="name"> description:</label>
+        <p htmlFor="description"> description:</p>
         <textarea
             name='description'
-            value={props.input.description}
-            onChange={props.handleChange}
+            value={state.input.description}
+            onChange={state.handleChange}
             />
+        {state.errors && state.errors.description ?  <p className='danger'> {state.errors.description} </p> : null}
+        
+
     </div>
 
     <div>
-        <label htmlFor="released"> released:</label>
+        <p htmlFor="released"> released:</p>
         <input 
             type="date" 
             name='released'
-            value={props.input.released}
-            onChange={props.handleChange}
+            value={state.input.released}
+            onChange={state.handleChange}
             />
+        {state.errors && state.errors.released ?  <p className='danger'> {state.errors.released} </p> : null}
+
     </div>
 
     <div>
-        <label htmlFor="released"> rating:</label>
+        <p htmlFor="rating"> rating:</p>
         <input 
-            type="number" 
+            type="string" 
             name='rating'
-            value={props.input.rating}
-            onChange={props.handleChange}
+            value={state.input.rating}
+            onChange={state.handleChange}
             />
+        {state.errors && state.errors.rating ?  <p className='danger'> {state.errors.rating} </p> : null}
+
     </div>
 </form>
     

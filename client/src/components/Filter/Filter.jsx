@@ -11,6 +11,7 @@ export default function Filter(props) {
                         <div>
 
                             <input
+                                name={filter.name}
                                 type={'submit'}
                                 id={filter.id} 
                                 value={filter.name}

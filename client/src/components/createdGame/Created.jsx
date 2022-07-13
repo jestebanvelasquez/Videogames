@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllGenres, getAllPlatforms, byAllPlatf, getAllGames } from '../../redux/actions/root-actions';
 import Preview from '../Preview/Preview';
 import Filter from '../Filter/Filter';
-import Game from '../Game/Game';
 import Button from './Button/Button';
 import Formulario from './Formulario/Formulario';
+import { Validate } from './Formulario/Validate';
 
 
 export default function Created() {
@@ -16,7 +16,7 @@ export default function Created() {
         disppatch(getAllGenres())
         disppatch(byAllPlatf())
     },[])
-//     [ ] Un formulario controlado con JavaScript con los siguientes campos:
+
 
     //------------Filter----------------------
     // const dispatch = useDispatch()
@@ -25,60 +25,80 @@ export default function Created() {
     const [filterBy, setFilterby] = useState(allPlatforms) 
     const [state, setState] = useState(allGenres);
 
+    
+    //------------State----------------------
+    
+    const [input, setInput] = useState({
+        name: '',
+        description: '',
+        released: '',
+        rating: null,
+        image: '',
+        platforms: [],
+        platformsName:[],
+        genres: [],
+        genresName: []
+    })
+    
     useEffect(() => {
         setState(allGenres)
         setFilterby(allPlatforms)
-    }, [allGenres, allPlatforms])
+        setInput(input)
+    }, [allGenres, allPlatforms, input])
+    //------------ State Errors ----------------------
 
-    //------------State----------------------
-
-    const [input, setInput] = useState({
-        name: 'hun',
-        description: '',
-        released: '',
-        rating: 0,
-        image: '',
-        platforms: [],
-        platformsName:[' hola '],
-        genres: [],
-        genresName: ['hola  ']
+    const [errors, setErrors] = useState({
+        name: 'name is required2'
     })
 
-
-    //------------------ preview ----------------------
-
-    // const [preview, setPreview] = useState({
-
-    // })
+    //------------------------ Changes ---------------------------------
 
     const handleChange = (e) => {
+        
         setInput({
             ...input,
             [e.target.name]: [e.target.value]
         })
+        let errorsResult = Validate({
+            ...state,
+            [e.target.name]: [e.target.value]
+        })
+        setErrors(errorsResult)
     }
     // console.log(state)
 
-    const onChangefilterby = (e) => {//validar si ya esta guardado
-        if (e.target.value) {
-            setInput({
-                ...input,
-                platforms : [...input.platforms, [e.target.id]],
-                platformsName : [...input.platformsName, [e.target.value]]
+    const onChangefilterby = (e) => {
+        
+        setInput(() => {
+            let platformsId = [...input.platforms, e.target.id] 
+                platformsId = [...new Set(platformsId)]
 
-            })
-        }
-        console.log(e.target.label)
+            let platformsfilterName = [...input.platformsName, e.target.value ]
+                platformsfilterName = [...new Set(platformsfilterName)]
+            console.log(platformsfilterName)
+            return {
+                    ...input,
+                    platforms : [...platformsId],
+                    platformsName : [...platformsfilterName]
+            }
+        })
     }
-    const onChangeGenres = (e) => {//validar si ya esta guardado
-        if (e.target.value) {
-            setInput({
-                ...input,
-                genres: [...input.genres, e.target.id],
-                genresName : [...input.genresName, e.target.value ]
-            })
-        }
-        // console.log()
+
+    const onChangeGenres = (e) => {
+
+        setInput(() => {
+            let genresId = [...input.genres, e.target.id] 
+                genresId = [...new Set(genresId)]
+
+            let genresFilterName = [...input.genresName, e.target.value]
+                genresFilterName = [...new Set(genresFilterName)]
+                return {
+                    ...input,
+                    genres: [...genresId],
+                    genresName : [...genresFilterName ]
+                }
+        })
+
     }
 
     const reset = (e) => {
@@ -86,7 +106,7 @@ export default function Created() {
             name: '',
             description: '',
             released: '',
-            rating: 0,
+            rating: null,
             image: '',
             platforms: [],
             genres: []
@@ -138,13 +158,14 @@ export default function Created() {
 {/* ------------------------------ Formulario -------------------*/}
 
         <div>
-            <Formulario input={input} handleChange={handleChange} handleSubmit={handleSubmit} />
+            <Formulario input={input} errors={errors} handleChange={handleChange} handleSubmit={handleSubmit} />
         </div>
 
 {/* ---------------------------- selects ---pensar en poner la imagen y al click enviar el nombre al state-------------------*/}
         <div>
-            <label htmlFor="name"> <h3>platforms:</h3></label>
+            <p >platforms: </p>
                 <Filter   filterBy={filterBy}  onChangefilterby={onChangefilterby}  />
+
             </div>
 
             <div>
