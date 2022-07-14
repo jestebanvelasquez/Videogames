@@ -9,6 +9,9 @@ export const BY_FILTER  = 'BY_FILTER';
 export const BY_GENRE  = 'BY_GENRE';
 export const GET_PLATFORMS  = 'GET_PLATFORMS';
 export const BY_ALL_PLATF  = 'BY_ALL_PLATF';
+export const GET_DATA_BASE  = 'GET_DATA_BASE';
+
+
 
 
 

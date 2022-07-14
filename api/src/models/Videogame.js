@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
     id:{
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
       primaryKey: true
     },
     name: {
@@ -28,10 +27,6 @@ module.exports = (sequelize) => {
     },
     image:{
       type: DataTypes.TEXT,
-      allowNull:false
-    },
-    platforms:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull:false
     }
   },

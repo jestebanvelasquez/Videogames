@@ -4,6 +4,7 @@ import {
     GET_BY_NAME,
     GET_PLATFORMS,
     GET_BY_ID,
+    GET_DATA_BASE,
     BY_FILTER,
     BY_GENRE,
     BY_ALL_PLATF
@@ -15,6 +16,7 @@ const initialState = {
     filterby: [],
     allGenres:[],
     allPlatforms:[],
+    byDataBase: [],
     byName:[],
     byPlatf: [],
     byId:{},
@@ -54,6 +56,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 byId: action.payload
         }
+        case GET_DATA_BASE:
+            return{
+                ...state,
+                byDataBase: action.payload
+            }
         case BY_FILTER:
             switch (action.payload) {
                 case 'all':
@@ -110,7 +117,7 @@ const rootReducer = (state = initialState, action) => {
             }
         case BY_GENRE:
             let byGenres = state.filterby
-            let genreByName = byGenres.filter( g => g.Genres ? g.Genres.includes(`${action.payload}`): null)
+            let genreByName = byGenres.filter( g => g.genres ? g.genres.includes(`${action.payload}`): null)
             return {
                 ...state,
                 allGames: genreByName

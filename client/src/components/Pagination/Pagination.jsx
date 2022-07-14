@@ -6,7 +6,8 @@ import Game from '../Game/Game.jsx';
 
 
 export default function Pagination({games, prevHandler, nextHandler, page, allpages  }) {
-
+// console.log(games)
+  
 
   return (
     <div>
@@ -18,17 +19,23 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
           <button onClick={nextHandler}> Next Page </button>
         </div>
 
-        <div>
+        <div key={games.id}>
           {
-            games ? games.map( game =>{
+          games ? games.map(game => {
+
+            
             return (
-              <Game 
-              id= {game.id}
-              image= {game.image}
-              name= {game.name}
-              genres= {game.genres}
-            />)
-          }) : 'no hay datos'
+              <div key={game.id}>
+                <Game
+                  id={game.id}
+                  image={game.image}
+                  name={game.name}
+                  genres={game.genres ? game.genres.map(el => el) : null}
+                  platforms= {game.platforms ? game.platforms.map(el => el ) : null}
+                />
+
+              </div>
+          )}) : 'no hay datos'
           }
         </div>
     </div>

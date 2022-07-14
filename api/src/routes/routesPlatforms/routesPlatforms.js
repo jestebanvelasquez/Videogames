@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const {Platforms} = require('../../db')
+const {Platform} = require('../../db')
 
 const {
     getAllPlatforms,
@@ -10,7 +10,7 @@ const {
 router.get('/', async (req, res) => {
     
     try {
-        const allPlatforms = await Platforms.findAll()
+        const allPlatforms = await Platform.findAll()
         res.status(200).json({data:allPlatforms})
     } catch (error) {
         res.status(500).json({message: error})

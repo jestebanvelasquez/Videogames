@@ -4,6 +4,7 @@ import {
     GET_BY_NAME,
     GET_PLATFORMS,
     GET_BY_ID,
+    GET_DATA_BASE,
     BY_FILTER,
     BY_GENRE,
     BY_ALL_PLATF
@@ -45,6 +46,7 @@ export const getByName = (name) => dispatch =>{
                 })
 }
 
+
 export const getAllPlatforms = () => dispatch => {
     return fetch('http://localhost:3002/platforms')
                 .then(r => r.json())
@@ -56,8 +58,8 @@ export const getAllPlatforms = () => dispatch => {
                 })
 }
 
-export const getDetailGame = () => dispatch => {
-    return fetch('http://localhost:3002/platforms')
+export const getDetailGame = (id) => dispatch => {
+    return fetch(`http://localhost:3002/videogames/${id}`)
                 .then(r => r.json())
                 .then(json => {
                     dispatch({
@@ -66,6 +68,18 @@ export const getDetailGame = () => dispatch => {
                     })
                 })
 }
+
+export const getDataBase = (id) => dispatch => {
+    return fetch(`http://localhost:3002/videogames/database`)
+                .then(r => r.json())
+                .then(json => {
+                    dispatch({
+                        type: GET_DATA_BASE,
+                        payload: json.data
+                    })
+                })
+}
+
 
 
 export const byFilter = (payload) => dispatch =>{

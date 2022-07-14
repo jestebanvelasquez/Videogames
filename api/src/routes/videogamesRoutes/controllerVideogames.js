@@ -1,4 +1,4 @@
-const {Videogame, Genre} = require('../../db');
+const {Videogame, Genre, Platform} = require('../../db');
 require('dotenv').config();
 const { API_KEY } = process.env;
 const {Op} = require('sequelize');
@@ -15,6 +15,8 @@ const postGame = async (name, description, released, rating, image, platforms, g
         image,
         // platforms
     })
+    // console.log(platforms)
+    // await newGame.addPlatforms(platforms)
     await newGame.addPlatforms(platforms)
     await newGame.addGenres(genres)
     return newGame //'created!'
@@ -23,47 +25,76 @@ const postGame = async (name, description, released, rating, image, platforms, g
 //------------------------------------metodo get: All-Api ---------------------------------
 
 const getApi = async () => {
-
-    let links = [];
-    let i = 1;
+        let allpages = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+        let nextUrl = allpages.data.next
+        let dataApi = [ ...allpages.data.results];
+        let i = 1;
             while (i <= 5) {
-                let allpages = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`)
-                allpages = allpages.data.results.map((game) => {
-                    return{
-                        id: game.id,
-                        name: game.name,
-                        slug:game.slug,
-                        image: game.background_image,
-                        rating: game.rating,
-                        platforms: game.platforms.map(el => el.platform.name),
-                        Genres:  game.genres.map(el => el.name)
-
-                        
-                    }
-                } )
-                links.push(allpages)
+                let api =await axios.get(nextUrl)
+                dataApi.push(api.data.results)
+                nextUrl = api.data.next
                 i++
             }
-            links = links.flat()
-    return links;
+            dataApi = dataApi.flat()
+
+            dataApi = dataApi.map((game) => {
+
+                return {
+                    id: game.id,
+                    name: game.name.toLowerCase(),
+                    slug: game.slug,
+                    image: game.background_image,
+                    rating: game.rating,
+                    platforms: game.platforms.map((el) => el.platform.name),
+                    genres: game.genres.map((el) => el.name),
+                };
+            });
+
+
+    return dataApi;
 }
 
 //------------------------------------metodo get: DataBase ---------------------------------
 
 const getBb = async () =>{
-    const byApi = await Videogame.findAll({
-        
-        include: [
-            {
-                model: Genre,
-                attributes: ['name'],
-                through:{
-                    attributes: []
-                } 
+    try {
+        const byDb = await Videogame.findAll({
+            
+            include: [
+                {
+                    model: Genre,
+                    attributes: ['name'],
+                    through:{
+                        attributes: []
+                    } 
+                },
+                {
+                    model: Platform,
+                    attributes:['name'],
+                    through:{
+                        attributes:[]
+                    }
+                }
+            ]
+        })
+    
+        const gamesDb = byDb.map(el => {
+            return {
+                id:el.id,
+                name: el.name,
+                image: el.image,
+                rating:el.rating,
+                platforms: el.Platforms.map(el => el.name),
+                genres: el.Genres.map(el => el.name)
+    
             }
-        ]
-    })
-    return byApi
+        }) 
+    
+        return gamesDb
+        
+    } catch (error) {
+        return error
+    }
 }
 
 //------------------------------------metodo get: Name ---------------------------------

@@ -27,10 +27,10 @@ modelDefiners.forEach(model => model(sequelize));
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
-
+console.log(sequelize.models)
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame, Genre , Platforms, Games_Platforms} = sequelize.models;
+const { Videogame, Genre , Platform, } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -38,12 +38,11 @@ Videogame.belongsToMany(Genre, {through: 'Videogames_Genre', })
 Genre.belongsToMany(Videogame, {through: 'Videogames_Genre', })
 
 
-Videogame.hasMany(Games_Platforms);
-Games_Platforms.belongsTo(Videogame);
 
-// Also setup a One-to-Many relationship between Profile and Grant
-Platforms.hasMany(Games_Platforms);
-Games_Platforms.belongsTo(Platforms);
+Videogame.belongsToMany(Platform, {through: 'Videogames_Platform', })
+Platform.belongsToMany(Videogame, {through: 'Videogames_Platform', })
+
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -23,7 +23,7 @@ const {getGenres} = require('./src/routes/routesGenre/controllerGenre')
 const {getAllPlatforms} = require('./src/routes/routesPlatforms/controllerPlatforms');
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false}).then(() => {
   getAllPlatforms()
   getGenres();
   server.listen(3002, () => {

@@ -1,4 +1,4 @@
-const {Videogame, Platforms} = require('../../db');
+const {Platform} = require('../../db');
 
 const  {
     getApi,
@@ -6,15 +6,17 @@ const  {
 
 const getAllPlatforms = async () =>{
     try {
-        const allPlatforms = await Platforms.findAll()
+        const allPlatforms = await Platform.findAll()
         if(!allPlatforms.length) {
             let platforms = await getApi()
             platforms = platforms.map(el => el.platforms).flat()
             platforms = [...new Set(platforms.sort())]
             platforms = platforms.map(el => {return {name : el}})
 
-            await Platforms.bulkCreate(platforms)
+            await Platform.bulkCreate(platforms)
+
         }
+
     } catch (error) {
         return error
     }
