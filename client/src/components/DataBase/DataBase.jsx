@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDataBase } from '../../redux/actions/root-actions';
+import Game from '../Game/Game';
 
 export default function DataBase() {
+  const dispatch = useDispatch();
+  const dataBase = useSelector((state) => state.byDataBase);
+
   useEffect(() => {
       dispatch(getDataBase())
   },[])
   
-  const dispatch = useDispatch();
-  const dataBase = useSelector((state) => state.byDataBase);
 
     console.log(dataBase)
 
@@ -18,9 +20,16 @@ export default function DataBase() {
     {
       dataBase.map( game => {
         return (
-          <h1>
-            {game.name}
-          </h1>
+          <div key={game.id}>
+            <Game
+              id={game.id}
+              image={game.image}
+              name={game.name}
+              genres={game.genres }
+              platforms= {game.platforms}
+            />
+
+          </div>
         )
       })
     }

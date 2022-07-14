@@ -85,7 +85,9 @@ const getBb = async () =>{
                 image: el.image,
                 rating:el.rating,
                 platforms: el.Platforms.map(el => el.name),
-                genres: el.Genres.map(el => el.name)
+                genres: el.Genres.map(el => el.name),
+                createDB:el.createDB
+                
     
             }
         }) 
@@ -113,10 +115,32 @@ const byNameDb = async (name) => {
                     model: Genre,
                     through: { attributes: [] },
                     
+                },
+                {
+                    model: Platform,
+                    attributes:['name'],
+                    through:{
+                        attributes:[]
+                    }
                 }
             ],
         })
-        return dbName;
+
+        const gamesDb = dbName.map(el => {
+            return {
+                id:el.id,
+                name: el.name,
+                image: el.image,
+                rating:el.rating,
+                platforms: el.Platforms.map(el => el.name),
+                genres: el.Genres.map(el => el.name),
+                createDB: el.createDB
+
+            }
+        })
+
+
+        return gamesDb;
     } catch (error) {
         return error
     }
@@ -161,8 +185,9 @@ const getByName = async (name) =>{
 //------------------------------------metodo get: ID ---------------------------------
 
 const getId = async (id) => {
+    // console.log(id.length)
     try {
-        if(id.length > 16) {
+        if(id.length === 36) {
             
             let idBd = await Videogame.findByPk(id,{
                 include: [
@@ -170,15 +195,48 @@ const getId = async (id) => {
                         model: Genre,
                         through: { attributes: [] },
                         
+                    },
+                    {
+                        model: Platform,
+                        attributes:['name'],
+                        through:{
+                            attributes:[]
+                        }
                     }
                 ]
             })
+                idBd =  {
+                    id:idBd.id,
+                    name: idBd.name,
+                    image: idBd.image,
+                    rating:idBd.rating,
+                    description: idBd.description,
+                    platforms: idBd.Platforms.map(el => el.name),
+                    genres: idBd.Genres.map(el => el.name),
+                    createDB:idBd.createDB
+                    
+        
+                }
+            
             console.log(idBd)
             return idBd;
 
         }else{
             let idApi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-            return idApi.data;
+            // console.log(idApi)
+            idApi = {
+                id: idApi.data.id,
+                name: idApi.data.name,
+                image: idApi.data.background_image,
+                description: idApi.data.description_raw,
+                rating: idApi.data.rating,
+                released: idApi.data.released,
+                genres: idApi.data.genres.map(el => el.name ),
+                platforms: idApi.data.platforms.map (el  => el.platform.name)
+
+            }
+
+            return idApi;
 
         }
         
@@ -189,24 +247,68 @@ const getId = async (id) => {
 }
 
 
+const deleteGameBD = async (id) => {
+    try {
+
+        await Videogame.destroy({
+            where:{id}
+        })
+    } catch (error) {
+        return error
+    } 
+}
+
+
 module.exports={
     getApi,
     getBb,
     getByName,
     getId,
     postGame,
-    byNameApi
+    byNameApi,
+    deleteGameBD
 
 }
 
+// //-------------------------------- Put/:id = http://localhost:3002/dogs/9 --------------------------------//
 
-//endPoints: 
-// forName
-// https://api.rawg.io/api/games/grand-theft-auto-v?key=c2ab33558d7c4e03924b023c552bdd90
+// router.put('/:idDog', async (req, res, next) => {
+//     const idDog = req.params.idDog;
 
-// getAll
-// https://api.rawg.io/api/games?key=c2ab33558d7c4e03924b023c552bdd90
+//     const { name, life_span, weight, height, image } = req.body
+//     try {
+//         let UpdDog = await Dog.update({
+//             name,
+//             life_span,
+//             height,
+//             weight,
+//             image
+//         }, {
+//             where: {
+//                 id: idDog
+//             }
+//         })
 
-// forId
-// https://api.rawg.io/api/games/5?key=c2ab33558d7c4e03924b023c552bdd90
+//         res.status(200).json({ data: UpdDog })
+
+//     } catch (error) {
+//         next(error);
+//     }
+// })
+
+// //-------------------------------- Delete/:id = http://localhost:3002/dogs/idDb --------------------------------//
+
+// router.delete('/:id', async (req, res, next) => {
+//     const id = req.params.id
+//     try {
+//         await Dog.destroy({
+//             where: { id }
+//         })
+//         res.status(204).json({ data: 'ok' })
+
+//     } catch (error) {
+//         next(error)
+//     }
+// })
+
 

@@ -5,9 +5,12 @@ import {
     GET_PLATFORMS,
     GET_BY_ID,
     GET_DATA_BASE,
+    DELETE_GAME_DB,
+
     BY_FILTER,
     BY_GENRE,
-    BY_ALL_PLATF
+    BY_ALL_PLATF,
+    DELETE_GAME_API
 } from '../actions/action-types'
 
 
@@ -61,6 +64,14 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 byDataBase: action.payload
             }
+        case DELETE_GAME_DB:
+            return {
+                ...state,
+                byDataBase : action.payload
+            }
+
+/// ---------------------------------------- local Reducers -----------------------------------------------------------------///
+
         case BY_FILTER:
             switch (action.payload) {
                 case 'all':
@@ -128,6 +139,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 byPlatf: byPlatf
+            }
+        case DELETE_GAME_API:
+            return {
+                ...state,
+                allGames : state.allGames.filter(el =>  el.id !== action.payload) 
             }
         default:
             return {

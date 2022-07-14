@@ -7,7 +7,9 @@ import {
     GET_DATA_BASE,
     BY_FILTER,
     BY_GENRE,
-    BY_ALL_PLATF
+    BY_ALL_PLATF,
+    DELETE_GAME_DB,
+    DELETE_GAME_API
 } from './action-types'
 
 export const getAllGames = () => dispatch =>{
@@ -34,6 +36,17 @@ export const getAllGenres = () => dispatch =>{
                 })
 }
 
+export const getAllPlatforms = () => dispatch => {
+    return fetch('http://localhost:3002/platforms')
+                .then(r => r.json())
+                .then(json => {
+                    dispatch({
+                        type: GET_PLATFORMS,
+                        payload: json.data
+                    })
+                })
+}
+
 export const getByName = (name) => dispatch =>{
     
     return fetch(`http://localhost:3002/videogames/name?name=${name}`)
@@ -47,16 +60,6 @@ export const getByName = (name) => dispatch =>{
 }
 
 
-export const getAllPlatforms = () => dispatch => {
-    return fetch('http://localhost:3002/platforms')
-                .then(r => r.json())
-                .then(json => {
-                    dispatch({
-                        type: GET_PLATFORMS,
-                        payload: json.data
-                    })
-                })
-}
 
 export const getDetailGame = (id) => dispatch => {
     return fetch(`http://localhost:3002/videogames/${id}`)
@@ -69,6 +72,7 @@ export const getDetailGame = (id) => dispatch => {
                 })
 }
 
+
 export const getDataBase = (id) => dispatch => {
     return fetch(`http://localhost:3002/videogames/database`)
                 .then(r => r.json())
@@ -78,9 +82,19 @@ export const getDataBase = (id) => dispatch => {
                         payload: json.data
                     })
                 })
-}
-
-
+            }
+            
+export const deleteGameDB = (id) => dispatch => {
+    return fetch(`http://localhost:3002/videogames/${id}`)
+                .then(r => r.json())
+                .then(json => {
+                    dispatch({
+                        type: DELETE_GAME_DB,
+                        // payload: json.data
+                    })
+                })
+            }
+///--------------------------------------------- Local Actions  ---------------------------------------------------------------/// 
 
 export const byFilter = (payload) => dispatch =>{
         dispatch({
@@ -102,6 +116,14 @@ export const byAllPlatf = () => dispatch =>{
             payload: 'BY_ALL_PLATF'
         })
 }
+
+export const deleteGameApi = (id) => dispatch =>{
+        dispatch({
+            type: DELETE_GAME_API,
+            payload: id
+        })
+}
+
 
 
 

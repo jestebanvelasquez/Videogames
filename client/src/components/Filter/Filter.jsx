@@ -8,7 +8,7 @@ export default function Filter(props) {
             {
                 props.filterBy ? props.filterBy.map((filter) =>{
                     return (
-                        <div>
+                        <div key={filter.id}>
 
                             <input
                                 name={filter.name}

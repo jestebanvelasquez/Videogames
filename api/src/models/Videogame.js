@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
     image:{
       type: DataTypes.TEXT,
       allowNull:false
+    },
+    createDB :{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   },
   {

@@ -8,9 +8,12 @@ import Formulario from './Formulario/Formulario';
 import { Validate } from './Formulario/Validate';
 import ImagesDefault from './ImagesDefault/ImagesDefault';
 import img from '../../assets/image1.png'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 export default function Created() {
+
+    const history = useHistory();
 
     const disppatch = useDispatch()
     useEffect(() => {
@@ -122,12 +125,13 @@ export default function Created() {
                 method: 'POST',
                 data
             })
-            return alert('creado correctamente')
+            // return alert('creado correctamente')
+            reset()
+            history.push('/home/database')
         } catch (error) {
             // return alert(' no se pudo crear')
         }
         
-        reset()
     }
     console.log(input)
 //------------------------------  presentation!!  -----------------------------------------------------------

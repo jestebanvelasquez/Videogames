@@ -10,7 +10,6 @@ export default function Detail() {
 
     useEffect(() => {
         dispatch(getDetailGame(params.id))
-        // setState(detail)
     }, [])
 
     // useEffect(() =>{
@@ -20,17 +19,16 @@ export default function Detail() {
     //     }
     // },[])
     return (
-        <div> 
+        <div>
             <h1>Detail : Header!!</h1>
-    
-        <img src={detail.background_image} alt="logo" width='200px' height='250px' />
-        <h1>{detail.name}</h1>
-        <h6>{detail.description}</h6>
-        <h3>{detail.released}</h3>
-        <h3>{detail.rating}</h3>
-        {/* <h3>{detail.platformsName}</h3> */}
 
-        {/* <h3>{detail.genresName}</h3> */}
+            <img src={detail.image} alt="logo" width='200px' height='250px' />
+            <h1>{detail.name}</h1>
+            <h6>{detail.description}</h6>
+            <h3>{detail.released}</h3>
+            <h3>{detail.rating}</h3>
+            <h3>{detail.platforms}</h3>
+            <h3>{detail.genres}</h3>
 
         </div>
     )
