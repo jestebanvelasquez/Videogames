@@ -1,0 +1,19 @@
+.container{
+    padding-right: 25px;
+}
+.contentInput input {
+
+    border-radius: 10px;
+    width: 300px;
+    height: 25px;
+    size: 200px;
+    border: 8px;
+    background-color: rgb(198, 198, 196);
+    color: gray;
+    font-size: 16px;
+}
+.contentForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

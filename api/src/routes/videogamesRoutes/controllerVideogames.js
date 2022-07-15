@@ -218,7 +218,7 @@ const getId = async (id) => {
         
                 }
             
-            console.log(idBd)
+            // console.log(idBd)
             return idBd;
 
         }else{

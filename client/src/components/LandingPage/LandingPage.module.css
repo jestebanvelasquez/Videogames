@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap'); 
+
+.landing {
+    background-image: url('../../assets/headers/background.svg');
+
+    background-size: cover;
+    margin: 0;
+    top: 0;
+    height: 100vh;
+    background-color: #706C61;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+
+}
+
+.landing h1 {
+    font-family: 'Merriweather', serif;;
+    color: #FFD700;
+    margin: 3rem;
+    width: auto;
+    height: auto;
+    font-size: 5rem;
+    background: #ebebeb52;
+    border-radius: 10px;
+    text-shadow:0 0 10px rgba(88, 88, 87, 0.556) ;
+}
+
+
+

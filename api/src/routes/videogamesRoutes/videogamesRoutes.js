@@ -83,7 +83,7 @@ router.get('/name', async (req, res, next) =>{
 
 router.get('/:id', async (req, res, next) =>{
     try {
-        const id = req.params;
+        const {id} = req.params;
         const byId = await getId(id)
         console.log(byId)
         res.status(200).json({data:byId})
@@ -92,16 +92,16 @@ router.get('/:id', async (req, res, next) =>{
     }
 })
 
-router.delete('/:id', async ( req, res, next) => {
-    const {id} = req.params
-    try {
-        const results = await deleteGameBD(id)
-        console.log(results)
+// router.delete('/:id', async ( req, res, next) => {
+//     const {id} = req.params
+//     try {
+//         const results = await deleteGameBD(id)
+//         console.log(results)
 
-        res.status(200).json({data:results})
-    } catch (error) {
-        next(error)
-    }
-})
+//         res.status(200).json({data:results})
+//     } catch (error) {
+//         next(error)
+//     }
+// })
 
 module.exports = router;

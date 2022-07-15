@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getByName } from '../../../redux/actions/root-actions';
+import search from './Search.module.css'
 
 export default function SearchBar() {
   const history = useHistory()
@@ -22,15 +23,20 @@ export default function SearchBar() {
 
 
   return (
-    <div>
+    <div className={search.container}>
       SearchBar
-      <form onSubmit={(e)=> handleSubmit (e)}>
-        <input 
+      <form
+        className={search.contenForm}
+        onSubmit={(e) => handleSubmit(e)}>
+        <div className={search.contentInput}>
+        <input
           type='text'
           placeholder='search game...'
           value={state}
-          onChange={(e) => handleChange (e)}
+          onChange={(e) => handleChange(e)}
         />
+
+        </div>
         <button >Search To Game </button>
       </form>
     </div>
