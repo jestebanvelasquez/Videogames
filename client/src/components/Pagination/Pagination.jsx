@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Game from '../Game/Game.jsx';
+import style from './Pagination.module.css'
 
 
 
@@ -10,7 +11,7 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
   
 
   return (
-    <div>
+    <div >
       Pagination
         <div>
           <button onClick={prevHandler}> Previous Page </button>
@@ -19,13 +20,13 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
           <button onClick={nextHandler}> Next Page </button>
         </div>
 
-        <div key={games.id}>
+        <div className={style.gameContainer} key={games.id}>
           {
           games ? games.map(game => {
 
             
             return (
-              <div key={game.id}>
+              <div className={style.game} key={game.id}>
                 <Game
                   id={game.id}
                   image={game.image}

@@ -24,9 +24,9 @@ export default function SearchBar() {
 
   return (
     <div className={search.container}>
-      SearchBar
+      
       <form
-        className={search.contenForm}
+        className={search.contentForm}
         onSubmit={(e) => handleSubmit(e)}>
         <div className={search.contentInput}>
         <input

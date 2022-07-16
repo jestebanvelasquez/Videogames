@@ -12,7 +12,7 @@ export default function ByName() {
     useEffect(()=>{
         setState(byName)
         setGames([...state].splice(0, gamesxPage))
-    },[byName, state])
+    },[state,byName])
     
     //Paginacion:
 

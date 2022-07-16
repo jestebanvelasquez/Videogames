@@ -1,0 +1,47 @@
+/* .container {
+    height: auto;
+    width: auto;
+    max-width: 200px;
+    background: rgb(116, 114, 114);
+    position: relative;
+    border: 1px solid transparent;
+    left: 0;
+    align-items: flex-end;
+} */
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.363);
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    z-index: 9;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalOpen {
+    /* padding: 10rem; */
+    /* position: relative; */
+    /* display: list-item; */
+    display: flex;
+    /* justify-content: center;
+    align-items: center; */
+    /* flex-direction: column; */
+    /* flex-direction: row; */
+}
+
+.modalDialog {
+    background-color: rgba(252, 199, 26, 0.439);
+    padding: 2px;
+    width: auto;
+    height: 50px;
+}
+
+.input {
+    display: flex;
+    border-radius: 5px;
+    /* flex-direction: column; */
+}

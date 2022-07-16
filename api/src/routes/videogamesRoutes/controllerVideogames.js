@@ -1,22 +1,22 @@
-const {Videogame, Genre, Platform} = require('../../db');
+const { Videogame, Genre, Platform } = require('../../db');
 require('dotenv').config();
 const { API_KEY } = process.env;
-const {Op} = require('sequelize');
+const { Op } = require('sequelize');
 const axios = require('axios');
 
 
 //------------------------------------metodo post: New-Game ---------------------------------
-const postGame = async (name, description, released, rating, image, platforms, genres) =>{
+const postGame = async(name, description, released, rating, image, platforms, genres) => {
     const newGame = await Videogame.create({
-        name,
-        description,
-        released,
-        rating,
-        image,
-        // platforms
-    })
-    // console.log(platforms)
-    // await newGame.addPlatforms(platforms)
+            name,
+            description,
+            released,
+            rating,
+            image,
+            // platforms
+        })
+        // console.log(platforms)
+        // await newGame.addPlatforms(platforms)
     await newGame.addPlatforms(platforms)
     await newGame.addGenres(genres)
     return newGame //'created!'
@@ -24,31 +24,31 @@ const postGame = async (name, description, released, rating, image, platforms, g
 
 //------------------------------------metodo get: All-Api ---------------------------------
 
-const getApi = async () => {
-        let allpages = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
-        let nextUrl = allpages.data.next
-        let dataApi = [ ...allpages.data.results];
-        let i = 1;
-            while (i <= 5) {
-                let api =await axios.get(nextUrl)
-                dataApi.push(api.data.results)
-                nextUrl = api.data.next
-                i++
-            }
-            dataApi = dataApi.flat()
+const getApi = async() => {
+    let allpages = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+    let nextUrl = allpages.data.next
+    let dataApi = [...allpages.data.results];
+    let i = 1;
+    while (i <= 5) {
+        let api = await axios.get(nextUrl)
+        dataApi.push(api.data.results)
+        nextUrl = api.data.next
+        i++
+    }
+    dataApi = dataApi.flat()
 
-            dataApi = dataApi.map((game) => {
+    dataApi = dataApi.map((game) => {
 
-                return {
-                    id: game.id,
-                    name: game.name.toLowerCase(),
-                    slug: game.slug,
-                    image: game.background_image,
-                    rating: game.rating,
-                    platforms: game.platforms.map((el) => el.platform.name),
-                    genres: game.genres.map((el) => el.name),
-                };
-            });
+        return {
+            id: game.id,
+            name: game.name.toLowerCase(),
+            slug: game.slug,
+            image: game.background_image,
+            rating: game.rating,
+            platforms: game.platforms.map((el) => el.platform.name),
+            genres: game.genres.map((el) => el.name),
+        };
+    });
 
 
     return dataApi;
@@ -56,44 +56,43 @@ const getApi = async () => {
 
 //------------------------------------metodo get: DataBase ---------------------------------
 
-const getBb = async () =>{
+const getBb = async() => {
     try {
         const byDb = await Videogame.findAll({
-            
-            include: [
-                {
+
+            include: [{
                     model: Genre,
                     attributes: ['name'],
-                    through:{
+                    through: {
                         attributes: []
-                    } 
+                    }
                 },
                 {
                     model: Platform,
-                    attributes:['name'],
-                    through:{
-                        attributes:[]
+                    attributes: ['name'],
+                    through: {
+                        attributes: []
                     }
                 }
             ]
         })
-    
+
         const gamesDb = byDb.map(el => {
             return {
-                id:el.id,
+                id: el.id,
                 name: el.name,
                 image: el.image,
-                rating:el.rating,
+                rating: el.rating,
                 platforms: el.Platforms.map(el => el.name),
                 genres: el.Genres.map(el => el.name),
-                createDB:el.createDB
-                
-    
+                createDB: el.createDB
+
+
             }
-        }) 
-    
+        })
+
         return gamesDb
-        
+
     } catch (error) {
         return error
     }
@@ -101,26 +100,25 @@ const getBb = async () =>{
 
 //------------------------------------metodo get: Name ---------------------------------
 
-const byNameDb = async (name) => {
+const byNameDb = async(name) => {
     try {
         let dbName = await Videogame.findAll({
             where: {
                 name: {
                     // [Op.substring]:name,
-                    [Op.iLike]: `%${name}%` 
+                    [Op.iLike]: `%${name}%`
                 },
             },
-            include: [
-                {
+            include: [{
                     model: Genre,
                     through: { attributes: [] },
-                    
+
                 },
                 {
                     model: Platform,
-                    attributes:['name'],
-                    through:{
-                        attributes:[]
+                    attributes: ['name'],
+                    through: {
+                        attributes: []
                     }
                 }
             ],
@@ -128,10 +126,10 @@ const byNameDb = async (name) => {
 
         const gamesDb = dbName.map(el => {
             return {
-                id:el.id,
+                id: el.id,
                 name: el.name,
                 image: el.image,
-                rating:el.rating,
+                rating: el.rating,
                 platforms: el.Platforms.map(el => el.name),
                 genres: el.Genres.map(el => el.name),
                 createDB: el.createDB
@@ -146,37 +144,37 @@ const byNameDb = async (name) => {
     }
 }
 
-const byNameApi = async (name) => {
+const byNameApi = async(name) => {
     // const element = name.toLowerCase;
     try {
         const apiAll = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`)
 
         const apiName = apiAll.data.results.map((game) => {
-            return{
+            return {
                 id: game.id,
                 name: game.name,
-                slug:game.slug,
+                slug: game.slug,
                 image: game.background_image,
                 rating: game.rating,
-                Genres:  game.genres.map(el => el.name) 
-                
+                genres: game.genres.map(el => el.name)
+
             }
-        } )
-        
+        })
+
         return apiName;
-        
+
     } catch (error) {
         return 'no hay datos con ese nombre'
     }
 
 }
 
-const getByName = async (name) =>{
+const getByName = async(name) => {
     try {
         let api = await byNameApi(name);
         let dataBase = await byNameDb(name);
         if (api) return dataBase.concat(api)
-    
+
     } catch (error) {
         return error
     }
@@ -184,46 +182,45 @@ const getByName = async (name) =>{
 
 //------------------------------------metodo get: ID ---------------------------------
 
-const getId = async (id) => {
+const getId = async(id) => {
     // console.log(id.length)
     try {
-        if(id.length === 36) {
-            
-            let idBd = await Videogame.findByPk(id,{
-                include: [
-                    {
+        if (id.length === 36) {
+
+            let idBd = await Videogame.findByPk(id, {
+                include: [{
                         model: Genre,
                         through: { attributes: [] },
-                        
+
                     },
                     {
                         model: Platform,
-                        attributes:['name'],
-                        through:{
-                            attributes:[]
+                        attributes: ['name'],
+                        through: {
+                            attributes: []
                         }
                     }
                 ]
             })
-                idBd =  {
-                    id:idBd.id,
-                    name: idBd.name,
-                    image: idBd.image,
-                    rating:idBd.rating,
-                    description: idBd.description,
-                    platforms: idBd.Platforms.map(el => el.name),
-                    genres: idBd.Genres.map(el => el.name),
-                    createDB:idBd.createDB
-                    
-        
-                }
-            
+            idBd = {
+                id: idBd.id,
+                name: idBd.name,
+                image: idBd.image,
+                rating: idBd.rating,
+                description: idBd.description,
+                platforms: idBd.Platforms.map(el => el.name),
+                genres: idBd.Genres.map(el => el.name),
+                createDB: idBd.createDB
+
+
+            }
+
             // console.log(idBd)
             return idBd;
 
-        }else{
+        } else {
             let idApi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
-            // console.log(idApi)
+                // console.log(idApi)
             idApi = {
                 id: idApi.data.id,
                 name: idApi.data.name,
@@ -231,15 +228,15 @@ const getId = async (id) => {
                 description: idApi.data.description_raw,
                 rating: idApi.data.rating,
                 released: idApi.data.released,
-                genres: idApi.data.genres.map(el => el.name ),
-                platforms: idApi.data.platforms.map (el  => el.platform.name)
+                genres: idApi.data.genres.map(el => el.name),
+                platforms: idApi.data.platforms.map(el => el.platform.name)
 
             }
 
             return idApi;
 
         }
-        
+
     } catch (error) {
         return error
     }
@@ -247,19 +244,19 @@ const getId = async (id) => {
 }
 
 
-const deleteGameBD = async (id) => {
+const deleteGameBD = async(id) => {
     try {
 
         await Videogame.destroy({
-            where:{id}
+            where: { id }
         })
     } catch (error) {
         return error
-    } 
+    }
 }
 
 
-module.exports={
+module.exports = {
     getApi,
     getBb,
     getByName,
@@ -310,5 +307,3 @@ module.exports={
 //         next(error)
 //     }
 // })
-
-

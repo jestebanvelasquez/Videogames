@@ -22,7 +22,6 @@ export default function VideoGames() {
         const vGames = Math.round(state.length / 15)
         const nextPage = page + 1;
         const index = nextPage * gamesxPage;
-        // console.log(allpages)
         if(page === vGames -1  ) return;
         setGames([...state].splice(index, gamesxPage))
         setPage(nextPage);
