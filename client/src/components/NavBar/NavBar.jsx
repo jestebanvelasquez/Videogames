@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar/SearchBar'
 import nav from './Navbar.module.css';
-import back from '../../assets/all/back.png'
 
 
 export default function NavBar() {

@@ -10,21 +10,23 @@ export default function Filter(props) {
     // console.log(props)
 
     return (
-        <div className={`${style.modal} ${ props.state && style.modalOpen}`}  onClick={props.close}>
+        <div className={style.filtersContain}  >
 
             {
                 props.filterBy.map((filter) =>{
                     return (
-                        <div className={style.modalDialog} key={filter.id} onClick={handleChange}>
+                        <div className={style.filter} key={filter.id} >
 
-                            <input
-                                className={style.input}
+                            <button
+                                className={style.bton}
                                 name={filter.name}
                                 type={'submit'}
                                 id={filter.id} 
                                 value={filter.name}
                                 onClick={(e) => props.onChangefilterby(e)}
-                            />
+                            >
+                                {filter.name}
+                            </button>
 
                         </div>
                     )}) 

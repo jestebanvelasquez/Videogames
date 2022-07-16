@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import images from './slider'
 import style from './Header.module.css'
+import {ReactComponent as ArrowRigth} from '../../../assets/icons/right.svg'
+import {ReactComponent as ArrowLeft} from '../../../assets/icons/left.svg'
 
 
 
@@ -30,11 +32,8 @@ export default function Header(props) {
     }
 
     return (
-        <div  className={style.slider}> 
-        <div>
-            <button onClick={prev}> prev </button>
-            
-            <button onClick={next}>next </button>
+        <div className={style.container} >
+            <div className={style.slideShow}>
             {
                 img.map((image) =>{
                     return (
@@ -44,9 +43,16 @@ export default function Header(props) {
                     )
                 })
             }
-        </div>
-        
-        
+                <div className={style.textSlide}>
+                    <h1> Video Games Henry </h1>
+                </div> 
+                <div className={style.controller}>
+                    <button className={`${style.btn} ${style.left}` } onClick={prev}> <ArrowLeft /> </button>
+                    <button className={`${style.btn} ${style.rigth}`} onClick={next}> <ArrowRigth /> </button>
+                </div>
+            </div>
+
         </div>
     )
 }
+
