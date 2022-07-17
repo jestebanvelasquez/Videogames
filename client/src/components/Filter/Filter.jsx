@@ -30,11 +30,7 @@ export default function Filter(props) {
 
                         </div>
                     )}) 
-                } 
-                            {/* <div>
-                                <button onClick={props.close}>close filters</button>
-                            </div> */}
-                
+                }                 
         </div>
     )
 }
