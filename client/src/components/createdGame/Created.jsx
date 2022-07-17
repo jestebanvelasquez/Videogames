@@ -8,8 +8,9 @@ import Formulario from './Formulario/Formulario';
 import { Validate } from './Formulario/Validate';
 import ImagesDefault from './ImagesDefault/ImagesDefault';
 import img from '../../assets/image1.png'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-
+import { useHistory } from 'react-router-dom';
+import styles from './Create.module.css'
+import keanu from '../../assets/headers/keanu.jpg'
 
 export default function Created() {
 
@@ -35,9 +36,9 @@ export default function Created() {
     //------------State----------------------
     
     const [input, setInput] = useState({
-        name: '',
-        description: '',
-        released: '',
+        name:'',
+        description:'',
+        released:'',
         rating: 0,
         image: `${img}`,
         platforms: [],
@@ -71,6 +72,7 @@ export default function Created() {
         })
         setErrors(errorsResult)
     }
+    console.log(input.name)
 
 
     const onChangefilterby = (e) => {
@@ -133,58 +135,68 @@ export default function Created() {
         }
         
     }
-    console.log(input)
-//------------------------------  presentation!!  -----------------------------------------------------------
+    
 
+    
     return (
+// {/*/////////////////////////////////----------- presentation -----------///////////////////////////////////////////////*/}
+
         <div>
-            <h1>
-                Created
-            </h1>
-            <section>
-                <h2>header!!</h2>
-            </section>
-
-{/* --------------------------------- Previsual ------------------------------------------------*/}
-
-            <div key={input.id}>
-                <Preview
-                    id={input.id}
-                    input={input}
-                    reset={reset}
-                />
+            <div className={styles.title}>
+                <h1> crea tu videogame </h1>
             </div>
+                <section className={styles.firstImage} >
+                    <img src={keanu} alt=" logo" />
+                </section>
 
-{/* ---------------------------------- images default ----------------------------------------------*/}
+{/*/////////////////////////////////----------- Previsual -----------///////////////////////////////////////////////*/}
 
-            <div>
-                <p htmlFor="released"> images default:</p>
-                <ImagesDefault handleChange={handleChange} />
+            <div className={styles.containerCreate}>
+                <div className={styles.preview}>
+                    <div className={styles.filters}>
+                        <div key={input.id}>
+                            <Preview
+                                id={input.id}
+                                input={input}
+                                reset={reset}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+{/*/////////////////////////////////----------- images default -----------///////////////////////////////////////////////*/}
+
+                <div className={styles.contentForm}>
+                    <div>
+                        <p htmlFor="released"> images default:</p>
+                        <ImagesDefault handleChange={handleChange} />
+                    </div>
+{/*/////////////////////////////////----------- Formulario -----------///////////////////////////////////////////////*/}
+
+                    <div>
+                        <Formulario input={input} errors={errors} handleChange={handleChange} handleSubmit={handleSubmit} />
+                    </div>
+                </div>
             </div>
+{/*/////////////////////////////////----------- selects -----------///////////////////////////////////////////////*/}
 
-{/* ----------------------------------- Formulario ---------------------------------------------*/}
+            <div className={styles.filters}>
+                <div>
+                    <label htmlFor="name"> <h3>Generos:</h3></label>
+                    <Filter
+                        filterBy={state}
+                        onChangefilterby={onChangeGenres}
+                    />
+                </div>
 
-            <div>
-                <Formulario input={input} errors={errors} handleChange={handleChange} handleSubmit={handleSubmit} />
+                <div>
+                    <label htmlFor="name"> <h3>Plataformas:</h3></label>
+                    <Filter
+                        filterBy={filterBy}
+                        onChangefilterby={onChangefilterby}
+                    />
+                </div>
             </div>
-
-{/* ------------------------------------ selects -----------------------------------------------*/}
-
-            <div>
-                <p >platforms: </p>
-                <Filter
-                    filterBy={filterBy}
-                    onChangefilterby={onChangefilterby}
-                />
-            </div>
-            <div>
-                <label htmlFor="name"> <h3>Generos:</h3></label>
-                <Filter
-                    filterBy={state}
-                    onChangefilterby={onChangeGenres}
-                />
-            </div>
-            <br />
         </div>
     )
 }

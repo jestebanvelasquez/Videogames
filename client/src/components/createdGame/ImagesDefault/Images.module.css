@@ -1,0 +1,21 @@
+.containerImg {
+    width: 100%;
+    display: flex;
+    position: relative;
+    right: 8rem;
+    /* background: transparent; */
+    border-radius: 10px;
+    /* box-shadow: 2px 2px 2px rgb(104, 104, 104); */
+}
+
+.img {
+    border-radius: 20px;
+    width: 150px;
+    padding: 5px;
+    height: 200px;
+}
+
+.img:hover {
+    background-color: rgba(255, 209, 3, 0.517);
+    transition: .3s ease;
+}

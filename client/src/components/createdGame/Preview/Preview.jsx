@@ -1,24 +1,50 @@
 import React, { useprops, useEffect } from 'react'
-// import { useDispatch, useSelector, useStore } from 'react-redux'
-// import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
-// import { getDetailGame } from '../../redux/actions/root-actions'
+import styles from './Preview.module.css';
 
 export default function Preview(props) {
     
     
   return (
-    <div> 
-      
-        
-        <img src={props.input.image} alt="logo" width='200px' height='250px' />
-        <h1>{props.input.name}</h1>
-        <h6>{props.input.description}</h6>
-        <h3>{props.input.released}</h3>
-        <h3>{props.input.rating}</h3>
-        <h3>{props.input.platformsName}</h3>
+    <div className={styles.containerPrev}>
 
-        <h3>{props.input.genresName}</h3>
-        <button onClick={props.reset}>reset game</button>
+      <div className={styles.contentImg}>
+        <img src={props.input.image} alt="logo"  />
+      </div>
+
+      <div className={styles.containerDatos}>
+        <div>
+
+        <h2>{props.input.name}  </h2> 
+        </div>
+        <blockquote>{props.input.description}</blockquote><br />
+        <span>{props.input.released}</span><br />
+        <span>{props.input.rating}</span><br />
+
+        <p> Plataformas Elegidas</p>
+
+        <div className={styles.platforms}>
+          {
+            props.input.platformsName? props.input.platformsName.map(el =>{
+              return (
+                <span> {el} </span>
+              )
+            }): null
+          }
+        </div>
+          <p> Generos Elegidos</p>
+        <div>
+          {
+            props.input.genresName ? props.input.genresName.map(el =>{
+              return (
+                <span> {el} </span>
+              )
+            }) : null
+          }
+        </div>
+      
+      </div>
+
+      <button className={styles.btn} onClick={props.reset}>reset game</button>
 
     </div>
   )

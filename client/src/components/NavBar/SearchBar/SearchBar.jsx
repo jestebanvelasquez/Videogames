@@ -20,7 +20,7 @@ export default function SearchBar() {
     setState('')
     history.push('/home/name')
   }
-
+  /// recordar validarlo!!!!
 
   return (
     <div className={search.container}>

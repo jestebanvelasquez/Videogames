@@ -1,0 +1,113 @@
+.containerPrev {
+    display: flex;
+    /* align-content: center; */
+    flex-direction: column;
+    padding: 25px;
+    /* background-color: red; */
+    width: 50vw;
+    height: 120%;
+}
+
+.contentImg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    margin-bottom: 20px;
+    /* background-color: rgba(31, 32, 32, 0.484); */
+    /* position: relative; */
+    /* margin: 0; */
+    align-content: center;
+    align-items: center;
+    border-radius: 25px;
+    opacity: .9;
+}
+
+.contentImg img {
+    width: 400px;
+    height: 300px;
+    border-radius: 20px;
+}
+
+.containerDatos {
+    margin-top: 10px;
+    height: 400px;
+    display: flow-root;
+    /* background-color: rgba(204, 204, 204, 0.236); */
+    border-radius: 13px;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    overflow: scroll;
+}
+
+.containerPrev h2 {
+    /* display: inline-block; */
+    left: 20px;
+    margin: 5px 65px;
+    margin-bottom: 80px;
+    color: rgba(255, 200, 1, 0.796);
+    text-shadow: 2px 2px 2px rgb(102, 100, 100);
+    text-align: center;
+    background-color: rgba(31, 30, 30, 0.34);
+    height: 35px;
+    width: 80%;
+    text-transform: capitalize;
+    text-shadow: -1px 2px 2px rgb(96, 96, 96);
+    border-radius: 4px;
+    display: block;
+    overflow: auto;
+}
+
+.containerPrev blockquote {
+    /* padding-top: 15px; */
+    margin: 5px 65px;
+    color: rgba(255, 200, 1, 0.796);
+    text-shadow: 2px 2px 2px rgb(102, 100, 100);
+    text-align: center;
+    background-color: rgba(31, 30, 30, 0.34);
+    height: 100px;
+    width: 80%;
+    text-transform: capitalize;
+    text-shadow: -1px 2px 2px rgb(96, 96, 96);
+    border-radius: 4px;
+    display: flow-root;
+    overflow: scroll;
+}
+
+.containerPrev span {
+    margin: 5px 65px;
+    padding-top: 15px;
+    color: rgba(255, 200, 1, 0.796);
+    text-shadow: 2px 2px 2px rgb(102, 100, 100);
+    text-align: center;
+    align-content: center;
+    background-color: rgba(31, 30, 30, 0.34);
+    height: 35px;
+    width: 80%;
+    text-transform: capitalize;
+    text-shadow: -1px 2px 2px rgb(96, 96, 96);
+    border-radius: 4px;
+    display: flow-root;
+    overflow: scroll;
+}
+
+.containerDatos p {
+    width: 50%;
+    margin: 9px 175px;
+    justify-items: center;
+    background-color: rgba(255, 200, 1, 0.595);
+    color: rgba(33, 32, 32, 0.745);
+    text-shadow: 2px 2px 2px rgb(102, 100, 100);
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.btn {
+    margin-top: 25px;
+    display: block;
+    width: 12%;
+    margin: 5px 325px;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './formhenry.css';
+import styles from './formhenry.module.css';
 
 export default function Formulario({handleSubmit, input, errors, handleChange, }) {
 
@@ -10,9 +10,9 @@ export default function Formulario({handleSubmit, input, errors, handleChange, }
 
 
     return (
-        <div>Formulario
+        <div className={styles.form} >
 
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e)} className={styles.formContainer}>
 
 
                 {/* ---------------------- inputs ---------------------- */}
@@ -20,8 +20,10 @@ export default function Formulario({handleSubmit, input, errors, handleChange, }
                 {/* ---------------------------------- images entry ----------------------------------------------*/}
 
                 <div>
-                    <p>agrega la url de la imagen </p>
+                    <p>Agrega La Url De La Imagen</p>
                     <input
+                        className={styles.contentInput}
+                        placeholder='inserta la url de la imagen....'
                         type='text'
                         name='image'
                         value={input.image}
@@ -31,53 +33,59 @@ export default function Formulario({handleSubmit, input, errors, handleChange, }
 
 
                 <div>
-                    <p htmlFor="name">name </p>
+                    <p htmlFor="name">Nonmbre del Juego </p>
                     <input
-                        splaceholder='name..'
-                        // className={props.errors.name && 'danger' }
+                        className={styles.contentInput}
+                        placeholder=' escribe el nombre del juego...'
                         type="text"
                         name='name'
                         value={input.name}
                         onChange={handleChange}
                     />
-                    {errors && errors.name ? <p className='danger'> {errors.name} </p> : null}
+                    {errors && errors.name ? <span className={styles.danger}> {errors.name} </span> : null}
                 </div>
 
                 <div>
-                    <p htmlFor="description"> description:</p>
+                    <p htmlFor="description"> Descripción:</p>
                     <textarea
+                        placeholder=' su descripción  ....'
+                        className={styles.contentArea}
                         name='description'
                         value={input.description}
                         onChange={handleChange}
                     />
-                    {errors && errors.description ? <p className='danger'> {errors.description} </p> : null}
+                    {errors && errors.description ? <span className={styles.danger}> {errors.description} </span> : null}
                 </div>
 
                 <div>
-                    <p htmlFor="released"> released:</p>
+                    <p htmlFor="released"> Fecha de Creacion:</p>
                     <input
+                        className={styles.contentInput}
                         type="date"
                         name='released'
                         value={input.released}
                         onChange={handleChange}
                     />
-                    {errors && errors.released ? <p className='danger'> {errors.released} </p> : null}
+                    {errors && errors.released ? <span className={styles.danger}> {errors.released} </span> : null}
 
                 </div>
 
                 <div>
-                    <p htmlFor="rating"> rating:</p>
+                    <p htmlFor="rating"> Puntuacion (de 0 a 5):</p>
                     <input
+                        className={styles.contentInput}
                         type="string"
                         name='rating'
                         value={input.rating}
                         onChange={handleChange}
                     />
-                    {errors && errors.rating ? <p className='danger'> {errors.rating} </p> : null}
+                    {errors && errors.rating ? <span className={styles.danger}> {errors.rating} </span> : null}
                 </div>
 
                 <div>
-                    <input type='submit' disabled={Object.keys(errors).length === 0 ? false : true} />
+                    <input 
+                        type='submit' 
+                        disabled={Object.keys(errors).length === 0 ? false : true} />
                 </div>
             </form>
 
