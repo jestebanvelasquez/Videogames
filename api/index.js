@@ -19,18 +19,18 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const {getGenres} = require('./src/routes/routesGenre/controllerGenre')
-const {getAllPlatforms} = require('./src/routes/routesPlatforms/controllerPlatforms');
+const { getGenres } = require('./src/routes/routesGenre/controllerGenre')
+const { getAllPlatforms } = require('./src/routes/routesPlatforms/controllerPlatforms');
 
 // Syncing all the models at once.
-conn.sync({ force: false}).then(() => {
-  getAllPlatforms()
-  getGenres();
-  server.listen(3002, () => {
-    console.log('listening at 3002'); // eslint-disable-line no-console
-  });
-})
-.catch(error => {
-  console.log(error)
-  return error
-})
+conn.sync({ force: false }).then(() => {
+        getAllPlatforms()
+        getGenres();
+        server.listen(3002, () => {
+            console.log('listening at 3002'); // eslint-disable-line no-console
+        });
+    })
+    .catch(error => {
+        console.log(error)
+        return error
+    })

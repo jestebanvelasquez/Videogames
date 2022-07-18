@@ -2,24 +2,31 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getByName } from '../../../redux/actions/root-actions';
-import ByName from '../../ByName/ByName';
-import search from './Search.module.css'
+import search from './Search.module.css';
+import Swal from "sweetalert2";
 
 export default function SearchBar() {
   const history = useHistory()
   const dispatch = useDispatch()
-    const [state, setState] = useState('');
+  const [state, setState] = useState('');
     
+   
+
+
+
     const handleChange = (e) =>{
       setState(e.target.value)
   }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    console.log(state);
-    dispatch(getByName(state))
-    setState('')
-    history.push('/home/name')
+    if(!state.length ){
+      Swal.fire('Ingresa un Nombre de Busqueda')
+    }else {
+      dispatch(getByName(state))
+      history.push('/home/name')
+      setState('')
+    }
   }
   /// recordar validarlo!!!!
   
