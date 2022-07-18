@@ -14,16 +14,14 @@ export default function LandingPage() {
 
     return (
         <div className={styles.landing} >
-            <div  >
+            <div className={styles.title} >
                 <h1> VideoGames Henry</h1>
             </div>
-
-            <div >
-                <Link to='/home'>
-                    <h4 > entrar </h4>
-                </Link>
-            </div>
-            
+        <Link to='/home'>
+            <button className={styles.bton}  data-hover = 'clic me!'>
+            <div className={styles.hoverMe}>hover me</div>
+            </button>
+        </Link>
         </div>
     )
 }

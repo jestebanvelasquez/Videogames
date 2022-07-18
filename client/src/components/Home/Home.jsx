@@ -45,6 +45,8 @@ export default function Home() {
         { id: "byZA", name: "Orden Desendente" },
         { id: "byRAsc", name: "Rating Ascendente" },
         { id: "byRDes", name: "Rating Desendente" },
+        { id: "byDb", name: "Origen Base de datos"},
+        { id: "byapi", name: "Origen Api Games"},
     ];
 
 

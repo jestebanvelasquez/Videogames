@@ -47,10 +47,11 @@ const getApi = async() => {
             rating: game.rating,
             platforms: game.platforms.map((el) => el.platform.name),
             genres: game.genres.map((el) => el.name),
+            createDB: false
         };
     });
 
-
+    // console.log(dataApi.data.createDB)
     return dataApi;
 }
 

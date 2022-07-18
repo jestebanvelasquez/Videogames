@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getByName } from '../../../redux/actions/root-actions';
+import ByName from '../../ByName/ByName';
 import search from './Search.module.css'
 
 export default function SearchBar() {
   const history = useHistory()
   const dispatch = useDispatch()
     const [state, setState] = useState('');
-
-  const handleChange = (e) =>{
-    setState(e.target.value)
+    
+    const handleChange = (e) =>{
+      setState(e.target.value)
   }
 
   const handleSubmit = (e) =>{
@@ -21,7 +22,8 @@ export default function SearchBar() {
     history.push('/home/name')
   }
   /// recordar validarlo!!!!
-
+  
+  
   return (
     <div className={search.container}>
       

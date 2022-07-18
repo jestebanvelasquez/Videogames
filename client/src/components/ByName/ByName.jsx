@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import Pagination from '../Pagination/Pagination'
+import styles from './ByName.module.css';
 
-export default function ByName() {
+export default function ByName(props) {
 
     const gamesxPage = 15;
     const byName = useSelector(state => state.byName)
@@ -13,6 +14,8 @@ export default function ByName() {
         setState(byName)
         setGames([...state].splice(0, gamesxPage))
     },[state,byName])
+
+
     
     //Paginacion:
 
@@ -36,11 +39,22 @@ export default function ByName() {
         setPage(prevPage)
     }
 
-  return (
-    <div>   
-        <h1>By Name</h1>
 
-        <Pagination games={games} prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages} />
+  return (
+    <div className={styles.contentName}>   
+        <div className={styles.title}>
+
+        <h1>Busqueda Por Nombre</h1>
+        </div>
+        <div className={styles.pagination}>
+        {
+            games.length ? (
+                <Pagination games={games} prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages} />
+            ) : <div className={styles.error}>
+                <h1>Introduce un nombre a buscar</h1>
+            </div>
+        }
+        </div>
     </div>
   )
 }

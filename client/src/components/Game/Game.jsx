@@ -19,9 +19,9 @@ export default function Game(props) {
                     </Link>
                         <span className={style.genres}>Generos :</span>
                     {
-                        props.genres.map(el =>{
+                        props.genres.map((el, i) =>{
                             return (
-                                <span className={style.genres}> {el}</span>
+                                <span className={style.genres} key={i}> {el}</span>
                             )
                         })
                     }

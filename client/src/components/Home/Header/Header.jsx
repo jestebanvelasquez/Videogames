@@ -32,19 +32,19 @@ export default function Header(props) {
     }
 
     return (
-        <div className={style.container} >
+        <div className={style.container}  >
             <div className={style.slideShow}>
             {
-                img.map((image) =>{
+                img.map((image, i) =>{
                     return (
-                        <div className= {style.slide}>
+                        <div className= {style.slide} key = {i}>
                             <img src= {image} alt='logo'/>
                         </div>
                     )
                 })
             }
                 <div className={style.textSlide}>
-                    <h1> Video Games Henry </h1>
+                    <h1> {props.title}</h1>
                 </div> 
                 <div className={style.controller}>
                     <button className={`${style.btn} ${style.left}` } onClick={prev}> <ArrowLeft /> </button>
