@@ -62,6 +62,7 @@ export default function Created() {
 //-------------------------------------------- Changes ---------------------------------//
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -72,7 +73,17 @@ export default function Created() {
         })
         setErrors(errorsResult)
     }
-    console.log(input.name)
+    const handleRange = (e) => {
+        setInput({
+            ...input,
+            rating : e.target.value
+        })
+        let errorsResult = Validate({
+            ...input,
+            rating: e.target.value
+        })
+        setErrors(errorsResult)
+    }
 
 
     const onChangefilterby = (e) => {
@@ -88,6 +99,14 @@ export default function Created() {
                     platformsName : [...platformsfilterName]
             }
         })
+        let errorsResult = Validate({
+            ...input,
+            platforms: e.target.value
+        })
+        setErrors(errorsResult)
+
+
+
     }
 
 
@@ -103,7 +122,18 @@ export default function Created() {
                     genresName : [...genresFilterName ]
                 }
         })
+        let errorsResult = Validate({
+            ...input,
+            genres: e.target.value
+        })
+        setErrors(errorsResult)
+
+
     }
+
+
+
+
     const reset = () => {
         setInput({
             name: '',
@@ -174,7 +204,7 @@ export default function Created() {
 {/*/////////////////////////////////----------- Formulario -----------///////////////////////////////////////////////*/}
 
                     <div>
-                        <Formulario input={input} errors={errors} handleChange={handleChange} handleSubmit={handleSubmit} />
+                        <Formulario input={input} errors={errors} handleChange={handleChange} handleSubmit={handleSubmit} handleRange={handleRange} />
                     </div>
                 </div>
             </div>
@@ -187,6 +217,8 @@ export default function Created() {
                         filterBy={state}
                         onChangefilterby={onChangeGenres}
                     />
+                    {errors && errors.genres ? <span className={styles.danger}> {errors.genres} </span> : null}
+
                 </div>
 
                 <div>
@@ -195,8 +227,18 @@ export default function Created() {
                         filterBy={filterBy}
                         onChangefilterby={onChangefilterby}
                     />
+                    {errors && errors.platforms ? <span className={styles.danger}> {errors.platforms} </span> : null}
+
                 </div>
             </div>
+
+            {/* <div>
+                    <input 
+                        type='submit'
+                        onSubmit={(e) => handleSubmit (e)}
+                        disabled={Object.keys(errors).length === 0 ? false : true} />
+                </div> */}
+
         </div>
     )
 }

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styles from './formhenry.module.css';
 
-export default function Formulario({handleSubmit, input, errors, handleChange, }) {
+export default function Formulario({handleSubmit, input, errors, handleChange, handleRange }) {
 
     
-
 
 
 
@@ -29,6 +28,7 @@ export default function Formulario({handleSubmit, input, errors, handleChange, }
                         value={input.image}
                         onChange={(e) => handleChange(e)}
                     />
+                    {errors && errors.image ? <span className={styles.danger}> {errors.image} </span> : null}
                 </div>
 
 
@@ -74,10 +74,11 @@ export default function Formulario({handleSubmit, input, errors, handleChange, }
                     <p htmlFor="rating"> Puntuacion (de 0 a 5):</p>
                     <input
                         className={styles.contentInput}
-                        type="string"
-                        name='rating'
-                        value={input.rating}
-                        onChange={handleChange}
+                        type="range" 
+                        min="0" 
+                        max="5" 
+                        step="0.1" 
+                        onChange={ handleRange}
                     />
                     {errors && errors.rating ? <span className={styles.danger}> {errors.rating} </span> : null}
                 </div>

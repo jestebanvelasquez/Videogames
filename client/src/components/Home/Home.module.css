@@ -4,6 +4,8 @@
     background-size: cover;
     background-color: #292828;
     position: relative;
+    max-width: auto;
+    max-height: auto;
 }
 
 .homeHeader {

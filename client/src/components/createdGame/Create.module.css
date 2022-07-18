@@ -62,3 +62,8 @@
     padding: 20px;
     /* background-color: yellow; */
 }
+
+.danger {
+    color: red;
+    font-size: 10px;
+}

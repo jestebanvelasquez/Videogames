@@ -4,6 +4,8 @@
     display: flex;
     /* background-color: aliceblue; */
     width: 100%;
+    max-width: auto;
+    max-height: auto;
 }
 
 .filter {
