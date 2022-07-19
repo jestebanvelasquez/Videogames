@@ -71,11 +71,11 @@ export default function Formulario({handleSubmit, input, errors, handleChange, h
                 </div>
 
                 <div>
-                    <p htmlFor="rating"> Puntuacion (de 0 a 5):</p>
+                    <p htmlFor="rating"> Puntuacion (de 1 a 5):</p>
                     <input
                         className={styles.contentInput}
                         type="range" 
-                        min="0" 
+                        min="1" 
                         max="5" 
                         step="0.1" 
                         onChange={ handleRange}
@@ -83,10 +83,11 @@ export default function Formulario({handleSubmit, input, errors, handleChange, h
                     {errors && errors.rating ? <span className={styles.danger}> {errors.rating} </span> : null}
                 </div>
 
-                <div>
-                    <input 
-                        type='submit' 
-                        disabled={Object.keys(errors).length === 0 ? false : true} />
+                <div className={styles.containerBton}>
+                    <button 
+                        className={styles.bton}
+                        type='submit'
+                        disabled={Object.keys(errors).length === 0 ? false : true} >¡Crearlo!</button> 
                 </div>
             </form>
 

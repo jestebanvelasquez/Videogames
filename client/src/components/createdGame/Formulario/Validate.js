@@ -31,19 +31,19 @@ export const Validate = (state) => {
 
     //------------------------ ValidacionRating: --------------------
 
-    if (state.rating <= 0) {
+    if (state.rating === 0) {
         errors.rating = 'rating is required'
     }
 
     //------------------------ ValidacionPlatforms: --------------------
 
-    if (state.platforms.length <= 0) {
+    if (!state.platforms ) {
         errors.platforms = 'platforms is required'
     }
 
     //------------------------ ValidacionGenres: --------------------
 
-    if (state.genres.length <= 0) {
+    if (!state.genres ) {
         errors.genres = 'genres is required'
     }
 

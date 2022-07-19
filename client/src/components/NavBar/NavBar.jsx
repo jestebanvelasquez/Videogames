@@ -10,9 +10,9 @@ export default function NavBar() {
             <nav className={nav.nav}>
                 <ul className={nav.ulItems}>
                     <li className={nav.liItems}>
-                         <Link to='/'> Back </Link> 
-                         <Link to='/home'> Home </Link> 
-                        <Link to='/home/database'> Createds </Link>
+                        <Link to='/'> Back </Link> 
+                        <Link to='/home'> Home </Link> 
+                        
                     </li>
                 </ul>
             <SearchBar />

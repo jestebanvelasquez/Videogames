@@ -11,6 +11,7 @@ import img from '../../assets/image1.png'
 import { useHistory } from 'react-router-dom';
 import styles from './Create.module.css'
 import keanu from '../../assets/headers/keanu.jpg'
+import Swal from "sweetalert2";
 
 export default function Created() {
 
@@ -114,6 +115,7 @@ export default function Created() {
         setInput(() => {
             let genresId = [...input.genres, e.target.id] 
                 genresId = [...new Set(genresId)]
+                console.log([...input.genresName])
             let genresFilterName = [...input.genresName, e.target.value]
                 genresFilterName = [...new Set(genresFilterName)]
                 return {
@@ -140,9 +142,11 @@ export default function Created() {
             description: '',
             released: '',
             rating: 0,
-            image: '',
+            image: `${img}`,
             platforms: [],
-            genres: []
+            platformsName:[],
+            genres: [],
+            genresName:[]
         })
     }
 
@@ -157,11 +161,12 @@ export default function Created() {
                 method: 'POST',
                 data
             })
-            // return alert('creado correctamente')
+            Swal.fire('creado correctamente')
             reset()
             history.push('/home/database')
         } catch (error) {
-            // return alert(' no se pudo crear')
+            Swal.fire(' no se pudo crear')
+
         }
         
     }
@@ -231,13 +236,6 @@ export default function Created() {
 
                 </div>
             </div>
-
-            {/* <div>
-                    <input 
-                        type='submit'
-                        onSubmit={(e) => handleSubmit (e)}
-                        disabled={Object.keys(errors).length === 0 ? false : true} />
-                </div> */}
 
         </div>
     )
