@@ -4,6 +4,7 @@ import Game from '../Game/Game.jsx';
 import style from './Pagination.module.css'
 import {ReactComponent as PageNext} from '../../assets/icons/pagenext.svg'
 import {ReactComponent as PagePrev} from '../../assets/icons/pageprev.svg'
+import Loading from '../Loading/Loading.jsx';
 
 
 
@@ -29,8 +30,13 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
         </div>
 
         <div className={style.gameContainer} key={games.id}>
+        
+
+
+        {/* <Loading/> */}
+
           {
-          games ? games.map(game => {
+          !games.length ?  <Loading/>   : games.map(game => {
 
             
             return (
@@ -44,7 +50,7 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
                 />
 
               </div>
-          )}) : 'no hay datos'
+          )})
           }
         </div>
     </div>

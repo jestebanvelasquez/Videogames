@@ -24,19 +24,18 @@
 
 .error {
     background-color: #292828;
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    position: relative;
     display: flex;
+    justify-content: center;
+    align-items: center;
     justify-content: center;
 }
 
-.error h1 {
-    width: 80%;
-    background: rgb(255, 213, 0);
+.error h3 {
+    width: 90%;
+    background: rgb(113, 113, 113);
     border-radius: 10px;
-    font-size: 4rem;
+    font-size: 2rem;
     color: rgb(44, 43, 43);
+    text-transform: capitalize;
     text-shadow: 3px 3px 3px #555;
 }

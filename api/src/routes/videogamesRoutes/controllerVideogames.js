@@ -207,6 +207,7 @@ const getId = async(id) => {
                 id: idBd.id,
                 name: idBd.name,
                 image: idBd.image,
+                released: idBd.released,
                 rating: idBd.rating,
                 description: idBd.description,
                 platforms: idBd.Platforms.map(el => el.name),
