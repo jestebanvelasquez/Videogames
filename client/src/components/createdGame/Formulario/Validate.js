@@ -1,49 +1,49 @@
-export const Validate = (state) => {
-    console.log(state)
+export const Validate = (input) => {
+    console.log(input)
     let errors = {};
 
     //------------------------ ValidacionName: --------------------
 
-    if (!state.name) {
+    if (!input.name) {
         errors.name = 'name is required'
-    } else if (/^[0-9]+$/.test(state.name)) {
+    } else if (/^[0-9]+$/.test(input.name)) {
         errors.name = ' name no debe ser un numero'
     }
 
     //------------------------ ValidacionImage: --------------------
 
-    if (state.image === '/static/media/image1.322da084.png' || !state.image.length) {
+    if (input.image === '/static/media/image1.322da084.png' || !input.image) {
         errors.image = 'image is required'
 
     }
 
     //------------------------ ValidacionDescription: --------------------
 
-    if (!state.description) {
+    if (!input.description) {
         errors.description = 'description is required'
     }
 
     //------------------------ ValidacionReleased: --------------------
 
-    if (!state.released.length) {
+    if (!input.released) {
         errors.released = 'released is required'
     }
 
     //------------------------ ValidacionRating: --------------------
 
-    if (state.rating === 0) {
+    if (!input.rating === 0) {
         errors.rating = 'rating is required'
     }
 
     //------------------------ ValidacionPlatforms: --------------------
 
-    if (!state.platforms.length ) {
+    if (!input.platforms.length ) {
         errors.platforms = 'platforms is required'
     }
 
     //------------------------ ValidacionGenres: --------------------
 
-    if (!state.genres.length ) {
+    if (!input.genres.length ) {
         errors.genres = 'genres is required'
     }
 

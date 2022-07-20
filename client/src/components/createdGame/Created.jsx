@@ -136,7 +136,7 @@ export default function Created() {
 
     const resetGenres = () => {
         setInput({
-            ...state,
+            ...input,
             genres: [],
             genresName:[]
         })
@@ -144,7 +144,7 @@ export default function Created() {
 
     const resetPlatforms = () => {
         setInput({
-            ...state,
+            ...input,
             platforms: [],
             platformsName:[],
         })

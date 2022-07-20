@@ -1,11 +1,12 @@
 .containerPrev {
     display: flex;
     top: 30px;
+    /* right: 10px; */
     /* align-content: center; */
     flex-direction: column;
-    padding: 45px;
+    /* padding: 45px; */
     /* background-color: red; */
-    width: 100%;
+    width:auto;
     /* height: 200%; */
 }
 
