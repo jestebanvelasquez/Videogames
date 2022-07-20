@@ -67,7 +67,7 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_GAME_DB:
             return {
                 ...state,
-                byDataBase: action.payload
+                allGames: action.payload
             }
 
             /// ---------------------------------------- local Reducers -----------------------------------------------------------------///

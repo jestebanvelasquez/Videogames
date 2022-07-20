@@ -5,13 +5,13 @@ export default function Loading() {
     return (
         <div className={styles.loadingContainer}>
 
-            <div class={styles.loading}>
-                <div class={styles.circle}></div>
-                <div class={styles.circle}></div>
-                <div class={styles.circle}></div>
-                <div class={styles.shadow}></div>
-                <div class={styles.shadow}></div>
-                <div class={styles.shadow}></div>
+            <div className={styles.loading}>
+                <div className={styles.circle}></div>
+                <div className={styles.circle}></div>
+                <div className={styles.circle}></div>
+                <div className={styles.shadow}></div>
+                <div className={styles.shadow}></div>
+                <div className={styles.shadow}></div>
             </div>
 
         </div>

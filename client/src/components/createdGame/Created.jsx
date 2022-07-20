@@ -186,6 +186,13 @@ export default function Created() {
         
     }
     
+//     Swal.fire({ cambiar y probar !!!
+//   position: 'top-end',
+//   icon: 'success',
+//   title: 'Your work has been saved',
+//   showConfirmButton: false,
+//   timer: 1500
+// })
 
     
     return (

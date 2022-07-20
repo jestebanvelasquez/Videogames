@@ -10,7 +10,7 @@ import Loading from '../Loading/Loading.jsx';
 
 
 
-export default function Pagination({games, prevHandler, nextHandler, page, allpages  }) {
+export default function Pagination({games, prevHandler, nextHandler, page, allpages , deleteGame }) {
 // console.log(games)
   
 
@@ -47,6 +47,7 @@ export default function Pagination({games, prevHandler, nextHandler, page, allpa
                   name={game.name}
                   genres={game.genres ? game.genres.map(el => el) : null}
                   platforms= {game.platforms ? game.platforms.map(el => el ) : null}
+                  createDB = {game.createDB}
                 />
 
               </div>

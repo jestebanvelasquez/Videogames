@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {
     GET_VIDEO_GAMES,
     GET_GENRES,
@@ -85,12 +86,12 @@ export const getDataBase = (id) => dispatch => {
             }
             
 export const deleteGameDB = (id) => dispatch => {
-    return fetch(`http://localhost:3002/videogames/${id}`)
-                .then(r => r.json())
+    return axios.delete(`http://localhost:3002/videogames/${id}`)
                 .then(json => {
+                    console.log(json.data.data)
                     dispatch({
                         type: DELETE_GAME_DB,
-                        // payload: json.data
+                        payload: json.data.data
                     })
                 })
             }

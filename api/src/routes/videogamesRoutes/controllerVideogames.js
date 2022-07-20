@@ -252,6 +252,13 @@ const deleteGameBD = async(id) => {
         await Videogame.destroy({
             where: { id }
         })
+        const newdB = await getBb()
+        const api = await getApi()
+
+        const allGames = [...newdB, ...api]
+
+        return allGames
+
     } catch (error) {
         return error
     }

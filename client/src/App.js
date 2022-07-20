@@ -8,6 +8,7 @@ import ByName from './components/ByName/ByName';
 import Created from './components/createdGame/Created';
 import Detail from './components/Detail/Detail';
 import DataBase from './components/DataBase/DataBase.jsx'
+import Footer from './components/Footer/Footer';
 
 
 
@@ -21,6 +22,8 @@ function App() {
       <Route exact path="/home/name" component={ByName} />
       <Route exact path="/home/detail/:id" component={Detail} />
       <Route exact path="/home/database" component={DataBase} />
+      <Route path="/home" component={Footer} />
+
     </div>
   );
 }

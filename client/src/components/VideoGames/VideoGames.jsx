@@ -1,6 +1,7 @@
 import React,{ useEffect, useState} from 'react';
-import {  useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import Pagination from '../Pagination/Pagination';
+
 
 export default function VideoGames() {
     const gamesxPage = 15;
@@ -35,7 +36,5 @@ export default function VideoGames() {
         setPage(prevPage)
     }
 
-
-
-    return <Pagination games={games} prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages}  />
+    return <Pagination games={games}  prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages}  />
 }
