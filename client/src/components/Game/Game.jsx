@@ -10,31 +10,37 @@ export default function Game(props) {
   const dispatch = useDispatch()
 
 
-const deleteGame = () =>{
-    console.log(props.createDB)
-    if(props.createDB){
-        dispatch(deleteGameDB(props.id))
-        Swal.fire({ //style alert! 
-                title: ` Videogame ${props.name} Delete Date Base!`,
-                icon:'success',
-                confirmButtonText:'Perfect!',
-                background:'#5C8D89',
-                confirmButtonColor: '#f5da9c'
-            })
-            
-    }else{
-        dispatch(deleteGameApi(props.id))
-        Swal.fire({ //style alert! 
-                title: ` Videogame ${props.name} Delete local Store!`,
-                icon:'success',
-                confirmButtonText:'Perfect!',
-                background:'#5C8D89',
-                confirmButtonColor: '#f5da9c'
-            })
-    }
-}
+    const deleteGame = () => {
+        console.log(props.createDB)
+        if (props.createDB) {
+            Swal.fire({
+                title: ` estas seguro de eliminar este  Videogame ${props.name} ?`,
+                showDenyButton: true,
+                // showCancelButton: true,
+                confirmButtonText: 'delete',
+                denyButtonText: `Don't delete`,
+            }).then((result) => {
 
-  // console.log(props)
+                if (result.isConfirmed) {
+                dispatch(deleteGameDB(props.id))
+                    Swal.fire(` Videogame ${props.name} Delete Date Base!`, '', 'success')
+                } else if (result.isDenied) {
+                    Swal.fire(` Videogame ${props.name} Don't delete  Date Base!`, '', 'info')
+                }
+            })
+
+        } else {
+            dispatch(deleteGameApi(props.id))
+            Swal.fire({ //style alert! 
+                title: ` Videogame ${props.name} Delete local Store!`,
+                icon: 'success',
+                confirmButtonText: 'Perfect!',
+                background: '#5C8D89',
+                confirmButtonColor: '#f5da9c'
+            })
+        }
+    }
+
     return (
         <div className={style.cardContainer} key={props.id} >
             <div className={style.card}>
@@ -51,6 +57,14 @@ const deleteGame = () =>{
                             )
                         })
                     }
+                    <div>
+                        {
+                            props.createDB ?( 
+                                <div>
+                                    <button> editar juego </button>
+                                </div> ) : null
+                        }
+                    </div>
                     <div>
                         <button onClick={deleteGame}> X </button>
                     </div>

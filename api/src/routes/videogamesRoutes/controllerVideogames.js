@@ -157,7 +157,8 @@ const byNameApi = async(name) => {
                 slug: game.slug,
                 image: game.background_image,
                 rating: game.rating,
-                genres: game.genres.map(el => el.name)
+                genres: game.genres.map(el => el.name),
+                createDB: false
 
             }
         })
@@ -231,7 +232,8 @@ const getId = async(id) => {
                 rating: idApi.data.rating,
                 released: idApi.data.released,
                 genres: idApi.data.genres.map(el => el.name),
-                platforms: idApi.data.platforms.map(el => el.platform.name)
+                platforms: idApi.data.platforms.map(el => el.platform.name),
+                createDB: false
 
             }
 

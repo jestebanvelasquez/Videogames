@@ -68,6 +68,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allGames: action.payload
+                //filtrar y actualizar tambien el estado de database!! para que pueda ser eliminado desde ese componente
             }
 
             /// ---------------------------------------- local Reducers -----------------------------------------------------------------///

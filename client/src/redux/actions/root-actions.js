@@ -88,7 +88,6 @@ export const getDataBase = (id) => dispatch => {
 export const deleteGameDB = (id) => dispatch => {
     return axios.delete(`http://localhost:3002/videogames/${id}`)
                 .then(json => {
-                    console.log(json.data.data)
                     dispatch({
                         type: DELETE_GAME_DB,
                         payload: json.data.data

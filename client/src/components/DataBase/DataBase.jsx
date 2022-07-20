@@ -39,6 +39,7 @@ export default function DataBase() {
                   name={game.name}
                   genres={game.genres}
                   platforms={game.platforms}
+                  createDB={game.createDB}
                 />
 
               </div>
