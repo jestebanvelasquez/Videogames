@@ -37,13 +37,13 @@ export const Validate = (state) => {
 
     //------------------------ ValidacionPlatforms: --------------------
 
-    if (!state.platforms ) {
+    if (!state.platforms.length ) {
         errors.platforms = 'platforms is required'
     }
 
     //------------------------ ValidacionGenres: --------------------
 
-    if (!state.genres ) {
+    if (!state.genres.length ) {
         errors.genres = 'genres is required'
     }
 

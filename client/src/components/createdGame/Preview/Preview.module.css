@@ -1,10 +1,11 @@
 .containerPrev {
     display: flex;
+    top: 30px;
     /* align-content: center; */
     flex-direction: column;
     padding: 45px;
     /* background-color: red; */
-    width: 50vw;
+    width: 100%;
     /* height: 200%; */
 }
 
@@ -105,9 +106,64 @@
     border-radius: 5px;
 }
 
-.btn {
+/* .btn {
     margin-top: 25px;
     display: block;
     width: 12%;
     margin: 5px 325px;
+} */
+.containerBton{
+    top: 35px;
+    display: flex;
+    height: 100%;
+    align-content: center;
+    align-items: center;
+    position: relative;
+    justify-content:space-around;
+}
+
+.bton {
+    /* top: 15px; */
+    
+    width: 130px;
+    height: 50px;
+    /* padding: 30px 5px; */
+    border: unset;
+    border-radius: 15px;
+    color: #ffffff;
+    z-index: 1;
+    background: #504f4f;
+    position: relative;
+    text-align: center;
+    font-weight: 1000;
+    font-size: 14px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(95, 95, 95, 0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.bton::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(213, 162, 7, 0.27);
+    background-color: #ffffff;
+    transition: all 250ms
+}
+
+.bton:hover {
+    color: #131313;
+    box-shadow: 4px 8px 19px -3px rgba(255, 200, 3, 0.591);
+
+}
+
+.bton:hover::before {
+    width: 100%;
 }

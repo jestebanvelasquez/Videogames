@@ -1,16 +1,21 @@
 .containerImg {
-    width: 100%;
+    /* width: 100%; */
     display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     position: relative;
-    right: 8rem;
-    /* background: transparent; */
     border-radius: 10px;
-    /* box-shadow: 2px 2px 2px rgb(104, 104, 104); */
+    padding: 4px;
+    /* background-color: red; */
 }
 
 .img {
+    display: flex;
+    flex-direction: column;
     border-radius: 20px;
-    width: 150px;
+    /* width: 150px; */
     padding: 5px;
     height: 200px;
 }

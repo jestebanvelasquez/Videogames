@@ -132,8 +132,23 @@ export default function Created() {
 
 
     }
+    ////////////////////////////////// resets: --/////////////////////////////////////////////////////////////
 
+    const resetGenres = () => {
+        setInput({
+            ...state,
+            genres: [],
+            genresName:[]
+        })
+    }
 
+    const resetPlatforms = () => {
+        setInput({
+            ...state,
+            platforms: [],
+            platformsName:[],
+        })
+    }
 
 
     const reset = () => {
@@ -193,6 +208,8 @@ export default function Created() {
                             <Preview
                                 id={input.id}
                                 input={input}
+                                resetGenres={resetGenres}
+                                resetPlatforms={resetPlatforms}
                                 reset={reset}
                             />
                         </div>
@@ -200,12 +217,13 @@ export default function Created() {
                 </div>
 
 {/*/////////////////////////////////----------- images default -----------///////////////////////////////////////////////*/}
-
                 <div className={styles.contentForm}>
-                    <div>
-                        <p htmlFor="released"> images default:</p>
+
+                    <div className={styles.contentImages}>
+                        <p className={styles.imagestitle} htmlFor="released"> images default:</p>
                         <ImagesDefault handleChange={handleChange} />
                     </div>
+
 {/*/////////////////////////////////----------- Formulario -----------///////////////////////////////////////////////*/}
 
                     <div>
@@ -216,25 +234,25 @@ export default function Created() {
 {/*/////////////////////////////////----------- selects -----------///////////////////////////////////////////////*/}
 
             <div className={styles.filters}>
-                <div>
-                    <label htmlFor="name"> <h3>Generos:</h3></label>
-                    <Filter
-                        filterBy={state}
-                        onChangefilterby={onChangeGenres}
-                    />
-                    {errors && errors.genres ? <span className={styles.danger}> {errors.genres} </span> : null}
-
-                </div>
-
-                <div>
-                    <label htmlFor="name"> <h3>Plataformas:</h3></label>
+                <div className={styles.filterstitle}>
                     <Filter
                         filterBy={filterBy}
                         onChangefilterby={onChangefilterby}
                     />
                     {errors && errors.platforms ? <span className={styles.danger}> {errors.platforms} </span> : null}
+                    <label htmlFor="name"> <h3> Agrega Las Plataformas:</h3></label>
 
                 </div>
+                <div className={styles.filterstitle}>
+                    <Filter
+                        filterBy={state}
+                        onChangefilterby={onChangeGenres}
+                    />
+
+                    {errors && errors.genres ? <span className={styles.danger}> {errors.genres} </span> : null}
+                    <label htmlFor="name"> <h3> Agrega Los Generos:</h3></label>
+                </div>
+
             </div>
 
         </div>

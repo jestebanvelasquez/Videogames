@@ -46,7 +46,10 @@ export default function SearchBar() {
         />
 
         </div>
-        <button >Search To Game </button>
+        <div className={search.containerBton}>
+
+        <button className={search.bton} >Search To Game </button>
+        </div>
       </form>
     </div>
   )
