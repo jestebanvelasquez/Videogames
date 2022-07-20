@@ -81,7 +81,7 @@ const getBb = async() => {
         const gamesDb = byDb.map(el => {
             return {
                 id: el.id,
-                name: el.name,
+                name: el.name.toLowerCase(),
                 image: el.image,
                 rating: el.rating,
                 platforms: el.Platforms.map(el => el.name),
@@ -250,16 +250,11 @@ const getId = async(id) => {
 
 const deleteGameBD = async(id) => {
     try {
-
         await Videogame.destroy({
             where: { id }
         })
         const newdB = await getBb()
-        const api = await getApi()
-
-        const allGames = [...newdB, ...api]
-
-        return allGames
+        return newdB
 
     } catch (error) {
         return error

@@ -57,7 +57,7 @@ export default function Home() {
             <Header title={"Bienvenido  A Mi App De Video Games"} />
             
             <Link to="/home/created">
-                <button className={style.btn}>Created</button>
+                <button className={style.btn}>¡ Create !</button>
             </Link>
             <div className={style.filter1}>
                 <div className={style.title}>

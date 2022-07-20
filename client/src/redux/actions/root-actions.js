@@ -18,9 +18,10 @@ export const getAllGames = () => dispatch =>{
     return fetch('http://localhost:3002/videogames')
                 .then(r => r.json())
                 .then(json =>{
+                    console.log(json)
                     dispatch({
                         type:GET_VIDEO_GAMES,
-                        payload:json.data
+                        payload:json
                     })
                 })
 }

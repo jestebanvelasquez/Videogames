@@ -44,9 +44,9 @@ router.get('/', async(req, res, next) => {
 
         const apiGames = await getApi();
         const dbGames = await getBb();
-        const allGames = [...dbGames, ...apiGames]
+        // const allGames = [...dbGames, ...apiGames]
 
-        res.status(200).json({ data: allGames })
+        res.status(200).json({ dataBd:dbGames,dataApi: apiGames })
 
     } catch (error) {
         next(error)
@@ -96,8 +96,6 @@ router.delete('/:id', async ( req, res, next) => {
     const {id} = req.params
     try {
         const results = await deleteGameBD(id)
-        console.log(results)
-
         res.status(200).json({data:results})
     } catch (error) {
         next(error)

@@ -5,6 +5,9 @@ import { getByName } from '../../../redux/actions/root-actions';
 import search from './Search.module.css';
 import Swal from "sweetalert2";
 
+
+
+
 export default function SearchBar() {
   const history = useHistory()
   const dispatch = useDispatch()
@@ -24,8 +27,8 @@ export default function SearchBar() {
       Swal.fire('Ingresa un Nombre de Busqueda')
     }else {
       dispatch(getByName(state))
-      history.push('/home/name')
       setState('')
+      history.push('/home/name')
     }
   }
   /// recordar validarlo!!!!

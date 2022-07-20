@@ -139,7 +139,12 @@ export default function Created() {
             ...input,
             genres: [],
             genresName:[]
+        }) // aplicar la validacion aqui tambien !!
+        let errorsResult = Validate({
+            ...input,
+            // genres: e.target.value
         })
+        setErrors(errorsResult)
     }
 
     const resetPlatforms = () => {
@@ -147,7 +152,15 @@ export default function Created() {
             ...input,
             platforms: [],
             platformsName:[],
+        })// aplicar la validacion aqui tambien !!
+        let errorsResult = Validate({
+            ...input,
+            // genres: e.target.value
         })
+        setErrors(errorsResult)
+
+
+
     }
 
 
@@ -176,7 +189,13 @@ export default function Created() {
                 method: 'POST',
                 data
             })
-            Swal.fire('creado correctamente')
+            Swal.fire({ //cambiar y probar !!!
+                position: 'center',
+                icon: 'success',
+                title: `El Videojuego ${input.name} Creado correctamente`,
+                showConfirmButton: false,
+                timer: 1500
+            })
             reset()
             history.push('/home/database')
         } catch (error) {

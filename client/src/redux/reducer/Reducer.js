@@ -15,11 +15,12 @@ import {
 
 
 const initialState = {
+    byDataBase: [],
+    byDataApi:[],
     allGames: [],
     filterby: [],
     allGenres: [],
     allPlatforms: [],
-    byDataBase: [],
     byName: [],
     byPlatf: [],
     byId: {},
@@ -29,14 +30,19 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_VIDEO_GAMES:
-            let platforms = action.payload
+            const dataApi = action.payload.dataApi
+            const dataBd = action.payload.dataBd
+            const allGames = [ ...dataApi, ...dataBd,]
+            let platforms = allGames
             platforms = platforms.map(el => el.platforms).flat()
             platforms = [...new Set(platforms.sort())]
             platforms = platforms.map(el => { return { name: el } })
             return {
                 ...state,
-                allGames: action.payload,
-                filterby: action.payload,
+                byDataApi:dataApi,
+                byDataBase:dataBd,
+                allGames: allGames,
+                filterby: allGames,
                 byPlatf: platforms
             }
         case GET_GENRES:
@@ -67,19 +73,20 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_GAME_DB:
             return {
                 ...state,
-                allGames: action.payload
+                allGames: [ ...state.byDataApi, action.payload ],
+                byDataBase: action.payload,
+                byName:[ ...state.byDataApi, action.payload ]
                 //filtrar y actualizar tambien el estado de database!! para que pueda ser eliminado desde ese componente
             }
 
-            /// ---------------------------------------- local Reducers -----------------------------------------------------------------///
+/// ---------------------------------------- local Reducers -----------------------------------------------------------------///
 
         case BY_FILTER:
             switch (action.payload) {
                 case 'all':
-                    const allGames = state.filterby;
                     return {
                         ...state,
-                        allGames: allGames
+                        allGames: [ ...state.byDataBase, ...state.byDataApi]
                     }
                 case 'byAZ':
                     const filterbyAZ = state.filterby
@@ -122,18 +129,18 @@ const rootReducer = (state = initialState, action) => {
                         allGames: statusFilterbyRDes
                     }
                 case 'byDb':
-                    const filterbyDb = state.filterby
-                    const allDbFilters = [...filterbyDb].filter((el) => el.createDB)
+                    // const filterbyDb = state.filterby
+                    // const allDbFilters = [...filterbyDb].filter((el) => el.createDB)
                     return {
                         ...state,
-                        allGames: allDbFilters
+                        allGames: state.byDataBase 
                     }
                 case 'byapi':
-                    const filterbyapi = state.filterby
-                    const allApiFilters = [...filterbyapi].filter((el) => !el.createDB)
+                    // const filterbyapi = state.filterby
+                    // const allApiFilters = [...filterbyapi].filter((el) => !el.createDB)
                     return {
                         ...state,
-                        allGames: allApiFilters
+                        allGames: state.byDataApi
                     }
 
                 default:
@@ -158,7 +165,8 @@ const rootReducer = (state = initialState, action) => {
         case DELETE_GAME_API:
             return {
                 ...state,
-                allGames: state.allGames.filter(el => el.id !== action.payload)
+                allGames: state.allGames.filter(el => el.id !== action.payload),
+                byName: state.byName.filter(el => el.id !== action.payload)
             }
         default:
             return {

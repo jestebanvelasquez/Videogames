@@ -12,20 +12,25 @@ export default function Game(props) {
 
     const deleteGame = () => {
         console.log(props.createDB)
+        let name = props.name.toUpperCase()
         if (props.createDB) {
             Swal.fire({
-                title: ` estas seguro de eliminar este  Videogame ${props.name} ?`,
+                title: ` Estas Seguro de Eliminar El  Videogame :  ${name} ?`,
                 showDenyButton: true,
                 // showCancelButton: true,
                 confirmButtonText: 'delete',
                 denyButtonText: `Don't delete`,
+                background: '#1c1d1d',
+                color:'#eae9e9',
+                confirmButtonColor: '#feb202'
             }).then((result) => {
 
                 if (result.isConfirmed) {
                 dispatch(deleteGameDB(props.id))
-                    Swal.fire(` Videogame ${props.name} Delete Date Base!`, '', 'success')
+                    Swal.fire(` Videogame ${name} Delete Date Base!`, '', 'success')
                 } else if (result.isDenied) {
-                    Swal.fire(` Videogame ${props.name} Don't delete  Date Base!`, '', 'info')
+                    Swal.fire({timer: 0.1}) //(` Videogame ${props.name} Don't delete  Date Base!`, '', 'info')
+                    
                 }
             })
 
@@ -35,8 +40,9 @@ export default function Game(props) {
                 title: ` Videogame ${props.name} Delete local Store!`,
                 icon: 'success',
                 confirmButtonText: 'Perfect!',
-                background: '#5C8D89',
-                confirmButtonColor: '#f5da9c'
+                background: '#1c1d1d',
+                color:'#eae9e9',
+                confirmButtonColor: '#feb202'
             })
         }
     }
