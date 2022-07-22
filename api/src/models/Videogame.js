@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
         },
         released: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
-            get() {
-                //const rawValue = this.getDataValue() //.toLocaleString({ timeZone: 'UTC' });
-                return this.getDataValue('released').toLocaleString({ timeZone: 'UTC' })
-            }
+            // allowNull: false,
+            // get() {
+            //     //const rawValue = this.getDataValue() //.toLocaleString({ timeZone: 'UTC' });
+            //     return this.getDataValue('released').toLocaleString({ timeZone: 'UTC' })
+            // }
         },
         rating: {
             type: DataTypes.DECIMAL,

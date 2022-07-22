@@ -7,19 +7,49 @@ const axios = require('axios');
 
 //------------------------------------metodo post: New-Game ---------------------------------
 const postGame = async(name, description, released, rating, image, platforms, genres) => {
-    const newGame = await Videogame.create({
-            name,
-            description,
-            released,
-            rating,
-            image,
-            // platforms
-        })
-        // console.log(platforms)
-        // await newGame.addPlatforms(platforms)
-    await newGame.addPlatforms(platforms)
-    await newGame.addGenres(genres)
-    return newGame //'created!'
+    name = name.trim().replace(/\s\s+/g, ' ')//quitar espacios delante del string y dobles
+    const arrayVacio = (arr) => !Array.isArray(arr) || arr.length === 0// validador de array vacio
+    
+    const ifname = await Videogame.findAll({
+        where:{
+            name : name
+        }
+    }) 
+
+/////////////////////////////////////// Validate ///////////////////////////////////////////Math.ceil(rating) >= 0 || Math.round(rating) > 5 ||
+
+    if(ifname.length > 0){
+        return {message: ` El Videojuego Con Nombre ${name} Ya Existe! `}
+    }
+    // else if (typeof rating !== 'number') {
+    //     return {message: ` Validar que el ${rating} sea menor que 5, mayor que 1 y no sea de tipo string `}
+    // }
+    else if (description.length < 10 || description.length > 980){
+    }else if(arrayVacio(platforms)) {
+        return {message: ` La propiedad Platforms esta vacia `}
+    }else if(arrayVacio(genres)) {
+        return {message: ` La propiedad genres esta vacia `}
+    }
+    else{
+        
+        const newGame = await Videogame.create({
+                name,
+                description,
+                released,
+                rating,
+                image,
+                // platforms
+            })
+            // console.log(platforms)
+            // await newGame.addPlatforms(platforms)
+        await newGame.addPlatforms(platforms)
+        await newGame.addGenres(genres)
+
+        return {response:'succes', data:newGame} //'created!'
+
+    }
+
+
 }
 
 //------------------------------------metodo get: All-Api ---------------------------------
@@ -247,6 +277,43 @@ const getId = async(id) => {
 
 }
 
+const validateName = async (name) => {
+    name = name.toLowerCase();
+    try {
+        
+        const validateN = await Videogame.findAll({
+            where : {
+                name:{name}
+            }
+        })
+        return validateN
+    } catch (error) {   
+        return error;
+    }
+
+
+}
+
+
+//probando expressValidator:
+
+
+// const createItem = async (req, res) => {
+//     try {
+//         const {name, age, email} = req.body
+//         const resDetail = await Videogame.create({
+//             name, age, email
+//         })
+//         res.send({data:resDetail})
+//     } catch (error) {
+//         next(error)
+//     }
+// }
+
+
+
+
+
 
 const deleteGameBD = async(id) => {
     try {
@@ -268,31 +335,34 @@ module.exports = {
     getByName,
     getId,
     postGame,
+    byNameDb,
     byNameApi,
-    deleteGameBD
+    deleteGameBD,
+    validateName,
+    // createItem
 
 }
 
-// //-------------------------------- Put/:id = http://localhost:3002/dogs/9 --------------------------------//
+// //-------------------------------- Put/:id = http://localhost:3002/videogames/ --------------------------------//
 
 // router.put('/:idDog', async (req, res, next) => {
 //     const idDog = req.params.idDog;
 
-//     const { name, life_span, weight, height, image } = req.body
+//     const { name, description, released, rating, image, platforms, genres } = req.body
 //     try {
-//         let UpdDog = await Dog.update({
+//         let game = await   Videogame.update({
 //             name,
-//             life_span,
-//             height,
-//             weight,
-//             image
+// description,
+// released,
+// rating,
+// image,
 //         }, {
 //             where: {
-//                 id: idDog
+//                 id: id
 //             }
 //         })
 
-//         res.status(200).json({ data: UpdDog })
+//         res.status(200).json({ data: game })
 
 //     } catch (error) {
 //         next(error);

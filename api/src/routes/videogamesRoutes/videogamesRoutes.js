@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const {validateCreate} = require ('../../expressValidator/VideoGame')
+
 const router = Router();
 const {
     getApi,
@@ -6,6 +8,7 @@ const {
     postGame,
     getByName,
     byNameApi,
+    byNameDb,
     getId,
     deleteGameBD
 
@@ -15,34 +18,33 @@ const {
 
 
 //Routes:
+//"released": "23/03/2017",
+//----------------------------- Post: http://localhost:3002/videogames----------------------------
 
-//-----------------------------http://localhost:3002/videogames----------------------------
-// {
-//     "name":"grand",
-//     "description":"para jugar cada dia jeje ",
-//     "released":"07/02/1900",
-//     "rating":"5.2",
-//     "image": "",
-//     "platforms": ["pc","play"],
-//     "genres": [1,3,5]
-// }
 router.post('/', async(req, res, next) => {
-    const { name, description, released, rating, image, platforms, genres } = req.body;
     try {
-        const byName = await getByName(name)
-        if(byName.length){
-            res.status(400).json({message: ` El Videojuego Con Nombre ${name} Ya Existe! ` })
-        }else {
-            const newGame = await postGame(name.trim().replace(/\s\s+/g, ' '), description, released, rating, image, platforms, genres)
-            res.status(200).json({ data: ` El Videojuego ${name} Creado Correctamente ` });
+        
+        const { name, description, released, rating, image, platforms, genres } = req.body;
+        
+        const newGame = await postGame(name, description, released, rating, image, platforms, genres)
+        if(newGame.response === 'succes'){
+            res.status(200).json({ data:newGame.data , succes: ` El Videojuego ${name} Creado Correctamente ` });
+        }else{
+
+            res.status(400).json({message:newGame.message})
         }
+
+
+        
+        
     } catch (error) {
-        // next(error)
-        return {error: `el videojuego con nombre ${name} ya existe`}
+        // console.log(error)
+        next(error)
+        //  return error.message
     }
 })
 
-//-----------------------------http://localhost:3001/videogames----------------------------
+//----------------------------- Gets : http://localhost:3002/videogames----------------------------
 
 router.get('/', async(req, res, next) => {
     try {
@@ -58,7 +60,7 @@ router.get('/', async(req, res, next) => {
     }
 })
 
-//-----------------------------http://localhost:3001/videogames/database----------------------------
+//----------------------------- http://localhost:3001/videogames/database ----------------------------
 
 router.get('/database', async(req, res, next) => {
     try {
@@ -97,6 +99,16 @@ router.get('/:id', async(req, res, next) => {
     }
 })
 
+router.get('/:id', (req, res, next ) => {
+    
+
+})
+
+
+
+
+//------------------------------ Delete: http://localhost:3001/videogames -------------------------------------------//
+
 router.delete('/:id', async ( req, res, next) => {
     const {id} = req.params
     try {
@@ -106,5 +118,17 @@ router.delete('/:id', async ( req, res, next) => {
         next(error)
     }
 })
+
+
+///// validation!! example:
+
+
+//importar: 
+// const {validateCreate} = require ('../../expressValidator/VideoGame')
+
+
+
+// router.post('/',  validateCreate, )
+
 
 module.exports = router;

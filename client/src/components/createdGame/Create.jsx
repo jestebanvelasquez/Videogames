@@ -37,7 +37,7 @@ export default function Create() {
     
     //------------State----------------------
     
-    // let create = {
+    // let create = {// tartando de crear el update
     //         name: '',
     //         description: '',
     //         released: '',
@@ -95,16 +95,17 @@ export default function Create() {
 //-------------------------------------------- State Errors -----------------------------//
 
     const [errors, setErrors] = useState({
-        name: 'name is required2'
+        name: 'name is required',
+
     })
 
 //-------------------------------------------- Changes ---------------------------------//
 
     const handleChange = (e) => {
-        console.log(e.target.value)
+        
         setInput({
             ...input,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value.toLowerCase()
         })
         let errorsResult = Validate({
             ...input,
@@ -139,7 +140,7 @@ export default function Create() {
         })
         let errorsResult = Validate({
             ...input,
-            platforms: e.target.value
+            platforms:[ e.target.value],
         })
         setErrors(errorsResult)
     }
@@ -148,7 +149,6 @@ export default function Create() {
         setInput(() => {
             let genresId = [...input.genres, e.target.id] 
                 genresId = [...new Set(genresId)]
-                console.log([...input.genresName])
             let genresFilterName = [...input.genresName, e.target.value]
                 genresFilterName = [...new Set(genresFilterName)]
                 return {
@@ -159,7 +159,7 @@ export default function Create() {
         })
         let errorsResult = Validate({
             ...input,
-            genres: e.target.value
+            genres: [e.target.value]
         })
         setErrors(errorsResult)
     }
@@ -174,7 +174,7 @@ export default function Create() {
         }) 
         let errorsResult = Validate({
             ...input,
-            // genres: e.target.value
+            genres: undefined
         })
         setErrors(errorsResult)
     }
@@ -187,7 +187,7 @@ export default function Create() {
         })
         let errorsResult = Validate({
             ...input,
-            // genres: e.target.value
+            platforms: undefined
         })
         setErrors(errorsResult)
     }
@@ -210,13 +210,17 @@ export default function Create() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         const data = {...input}
         try {
+        
+            //const response = 
             await axios({
                 url: 'http://localhost:3002/videogames',
                 method: 'POST',
                 data
             })
+
             Swal.fire({ 
                 position: 'center',
                 icon: 'success',
@@ -228,7 +232,6 @@ export default function Create() {
             history.push('/home/database')
         } catch (error) {
             Swal.fire(error.response.data.message)
-
         }
         
     }
@@ -241,8 +244,8 @@ export default function Create() {
 
         <div>
             <div className={styles.title}>
-            {/* update.createBD = true ? 'modifica tu videojuego' :  */}
-                <h1> { 'crea tu videogame' } </h1>
+            {/* update.createBD = true ? 'modifica tu videojuego' :  */} 
+                <h1> crea tu videogame  </h1>
             </div>
                 <section className={styles.firstImage} >
                     <img src={keanu} alt=" logo" />

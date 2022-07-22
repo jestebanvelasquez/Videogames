@@ -1,5 +1,6 @@
 export const Validate = (input) => {
     // console.log(input)
+    const arrayVacio = (arr) => !Array.isArray(arr) || arr.length === 0
     let errors = {};
 
     //------------------------ ValidacionName: --------------------
@@ -8,25 +9,26 @@ export const Validate = (input) => {
         errors.name = 'name is required'
     } else if (/^[0-9]+$/.test(input.name)) {
         errors.name = ' name no debe ser un numero'
-    }else if( (!/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name))){
-        errors.name = 'no se aceptan caracteres especiales'
     }
+    // else if( /^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.name)){
+    //     errors.name = 'no se aceptan caracteres especiales'
+    // }
 
     //------------------------ ValidacionImage: --------------------
 
     if (input.image === '/static/media/image1.322da084.png' || !input.image) {
         errors.image = 'image is required'
-    }else if (!/^(ftp|http|https):\/\/[^ "]+$/.test(input.image)){//no funciona!
-        errors.image = 'Url no valida' 
     }
 
     //------------------------ ValidacionDescription: --------------------
 
     if (!input.description) {
         errors.description = 'description is required'
-    }else if( (!/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.description))){ // revisar, no cumple!! 
-        errors.description = 'no se aceptan caracteres especiales'
-    }else if ( input.description.length > 980){
+    }
+    // else if( (!/^[A-Z]+[A-Za-z0-9\s]+$/g.test(input.description))){ // revisar, no cumple!! 
+    //     errors.description = 'no se aceptan caracteres especiales'
+    // }
+    else if ( input.description.length > 980){
         errors.description = 'El maximo de caracteres permitido son 980'
     }
 
@@ -38,19 +40,19 @@ export const Validate = (input) => {
 
     //------------------------ ValidacionRating: --------------------
 
-    if (!input.rating === 0) {
+    if (input.rating === 0 || ! input.rating) {
         errors.rating = 'rating is required'
     }
 
     //------------------------ ValidacionPlatforms: --------------------
 
-    if (!input.platforms.length ) {
+    if (arrayVacio(input.platforms )) {
         errors.platforms = 'platforms is required'
     }
 
     //------------------------ ValidacionGenres: --------------------
 
-    if (!input.genres.length ) {
+    if (arrayVacio(input.genres )) {
         errors.genres = 'genres is required'
     }
 
