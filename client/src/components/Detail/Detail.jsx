@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
-import { getDetailGame } from '../../redux/actions/root-actions'
+import { clearstate, getDetailGame } from '../../redux/actions/root-actions'
 import styles from './Detail.module.css';
 import Loading from '../Loading/Loading'
 
 export default function Detail() {
     const dispatch = useDispatch()
-    const detail = useSelector((state) => state.byId)
     const params = useParams()
-    
+    const detail = useSelector((state) => state.byId)
+    console.log(detail)
+    // const [state, setState] = useState(detail)
     
     useEffect(() => {
+        // setState(detail)
         dispatch(getDetailGame(params.id))
-        return () =>{
-            
-        }
-    }, [])
-
         
+        
+    }, [dispatch, params])
+    
+    useEffect(() => {
+        return () => {
+            dispatch(clearstate('byId'))
+        }
+    },[dispatch])
+    
+
+
     return (
         <div className={styles.containerDetail}>
             { !detail ? <Loading /> :

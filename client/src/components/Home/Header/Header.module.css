@@ -1,5 +1,6 @@
 .container {
     position: relative;
+    height: 100%;
 }
 
 .slideShow {
@@ -12,6 +13,7 @@
     overflow: hidden;
     max-height: 700px;
     position: relative;
+    /* z-index: -1; */
 }
 
 .slide img {
@@ -19,12 +21,17 @@
     max-height: max-content;
     right: 10px;
     width: 100%;
-    vertical-align: top;
+    /* z-index: -1; */
+    /* vertical-align: top; */
 }
 
 .textSlide {
-    background-color: rgb(34, 32, 32);
+    /* background-color: rgb(34, 32, 32); */
     display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    margin-left: 150px;
     justify-content: center;
     width: 100%;
     text-align: center;
@@ -34,7 +41,7 @@
 }
 
 .textSlide h1 {
-    flex-direction: row;
+    /* flex-direction: row; */
     position: relative;
     width: 80%;
     background-color: rgba(255, 200, 1, 0.796);

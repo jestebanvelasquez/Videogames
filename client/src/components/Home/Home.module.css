@@ -1,11 +1,19 @@
 .homeContainer {
-    width: 100%;
+    /* width: 100%;
+    height: 100%; */
+    width: 100vw;
     height: 100%;
     background-size: cover;
     background-color: #292828;
     position: relative;
     max-width: auto;
     max-height: auto;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+    
+
 }
 
 .homeHeader {

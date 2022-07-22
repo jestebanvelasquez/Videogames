@@ -12,10 +12,10 @@ export default function NavBar() {
                     <li className={nav.liItems}>
                         <Link to='/'> Back </Link> 
                         <Link to='/home'> Home </Link> 
-                        <Link to='/home/created'> ¡ Create ! </Link> 
+                        <Link to='/home/create'> ¡ Create ! </Link> 
                         
                     </li>
-                </ul>¡ Create !
+                </ul>
             <SearchBar />
             </nav>
         </div>

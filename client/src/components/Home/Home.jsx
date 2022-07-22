@@ -12,19 +12,21 @@ export default function Home() {
 
     useEffect(() => {
         dispatch(getAllGenres());
-    }, []);
-    useEffect(() => {
         dispatch(getAllGames());
-    }, []);
+    }, [dispatch]);
 
     //------------Filter----------------------
+    const dataGames = useSelector((state) => state.allGames);
+    const [stateGames, setGames] = useState(dataGames);
+    
     const allGenres = useSelector((state) => state.allGenres);
     const [stateGenres, setState] = useState(allGenres);
     const [title, setTitle] = useState("Un Order");
 
     useEffect(() => {
         setState(allGenres);
-    }, [allGenres]);
+        setGames(dataGames)
+    }, [allGenres, dataGames]);
 
     const onChangeGenres = (e) => {
         const name = e.target.value;
@@ -56,7 +58,7 @@ export default function Home() {
 
             <Header title={"Bienvenido  A Mi App De Video Games"} />
             
-            <Link to="/home/created">
+            <Link to="/home/create">
                 <button className={style.btn}>¡ Create !</button>
             </Link>
             <div className={style.filter1}>
@@ -76,7 +78,7 @@ export default function Home() {
             </div>
 
             <div className={style.games}>
-                <VideoGames />
+                <VideoGames dataGames={stateGames} />
             </div>
         </div>
     );

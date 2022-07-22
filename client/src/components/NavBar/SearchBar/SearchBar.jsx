@@ -27,7 +27,7 @@ export default function SearchBar() {
       Swal.fire('Ingresa un Nombre de Busqueda')
     }else {
       dispatch(getByName(state))
-      setState('')
+      setState('')//validar caracteres raros
       history.push('/home/name')
     }
   }

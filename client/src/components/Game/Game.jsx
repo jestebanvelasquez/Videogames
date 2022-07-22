@@ -1,13 +1,24 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { deleteGameApi, deleteGameDB } from '../../redux/actions/root-actions'
+import { deleteGameApi, deleteGameDB, getDetailGame} from '../../redux/actions/root-actions'
 import style from './Game.module.css'
 import Swal from "sweetalert2";
+// import { useHistory } from 'react-router-dom'
 
 
 export default function Game(props) {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    // const history = useHistory()
+
+
+    // const update = () => { //probando update
+    //     dispatch(getDetailGame(props.id))
+    //     history.push('/home/create')
+    // }
+
+
+
 
 
     const deleteGame = () => {
@@ -63,14 +74,14 @@ export default function Game(props) {
                             )
                         })
                     }
-                    <div>
+                    {/* <div> //probando update!
                         {
                             props.createDB ?( 
                                 <div>
-                                    <button> editar juego </button>
+                                    <button onClick={update}> editar juego </button>
                                 </div> ) : null
                         }
-                    </div>
+                    </div> */}
                     <div>
                         <button onClick={deleteGame}> X </button>
                     </div>

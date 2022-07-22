@@ -13,6 +13,9 @@ export const BY_FILTER  = 'BY_FILTER';
 export const BY_GENRE  = 'BY_GENRE';
 export const BY_ALL_PLATF  = 'BY_ALL_PLATF';
 export const DELETE_GAME_API  = 'DELETE_GAME_API';
+export const ERRORS  = 'ERRORS';
+export const RESET_STATE  = 'RESET_STATE';
+
 
 
 

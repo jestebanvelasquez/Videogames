@@ -6,11 +6,15 @@ import {
     GET_BY_ID,
     GET_DATA_BASE,
     DELETE_GAME_DB,
+    ERRORS,
 
+    //////////////// Local reducers: ///////////////
+    
     BY_FILTER,
     BY_GENRE,
     BY_ALL_PLATF,
-    DELETE_GAME_API
+    DELETE_GAME_API,
+    RESET_STATE
 } from '../actions/action-types'
 
 
@@ -24,6 +28,8 @@ const initialState = {
     byName: [],
     byPlatf: [],
     byId: {},
+
+    errors:[]
 
 }
 
@@ -78,8 +84,13 @@ const rootReducer = (state = initialState, action) => {
                 byName:[ ...state.byDataApi, action.payload ]
                 //filtrar y actualizar tambien el estado de database!! para que pueda ser eliminado desde ese componente
             }
+        case ERRORS:
+            return {
+                ...state,
+                errors: action.payload
+            }
 
-/// ---------------------------------------- local Reducers -----------------------------------------------------------------///
+////////////////////////////////////////// local Reducers /////////////////////////////////////////////////////////////
 
         case BY_FILTER:
             switch (action.payload) {
@@ -128,6 +139,9 @@ const rootReducer = (state = initialState, action) => {
                         ...state,
                         allGames: statusFilterbyRDes
                     }
+
+//////////////////////////  Ya se hace con la respuesta de la api, que viene separada en un objeto: //////////////////////
+
                 case 'byDb':
                     // const filterbyDb = state.filterby
                     // const allDbFilters = [...filterbyDb].filter((el) => el.createDB)
@@ -142,12 +156,14 @@ const rootReducer = (state = initialState, action) => {
                         ...state,
                         allGames: state.byDataApi
                     }
+                    
+                    default:
+                        return {
+                            ...state
+                        };
 
-                default:
-                    return {
-                        ...state
-                    };
-            }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        }
         case BY_GENRE:
             let byGenres = state.filterby
             let genreByName = byGenres.filter(g => g.genres ? g.genres.includes(`${action.payload}`) : null)
@@ -167,6 +183,19 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allGames: state.allGames.filter(el => el.id !== action.payload),
                 byName: state.byName.filter(el => el.id !== action.payload)
+            }
+        case RESET_STATE:
+                switch(action.payload){
+                    case 'byId':
+                        return {
+                            ...state,
+                            byId: {}
+                        }
+            default:
+                return {
+                    ...state
+                };
+
             }
         default:
             return {

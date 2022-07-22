@@ -24,9 +24,9 @@
 .title span {
     /* padding: 10; */
     margin-bottom: 10px;
-    /* width: 100%; */
+    width: 100%;
     color: rgba(255, 200, 1, 0.796);
-    /* font-size: 20px; */
+    font-size: 20px;
     font-weight: 700;
 }
 

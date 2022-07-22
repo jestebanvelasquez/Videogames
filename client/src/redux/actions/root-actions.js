@@ -10,7 +10,10 @@ import {
     BY_GENRE,
     BY_ALL_PLATF,
     DELETE_GAME_DB,
-    DELETE_GAME_API
+    DELETE_GAME_API,
+
+    RESET_STATE,
+    ERRORS
 } from './action-types'
 
 export const getAllGames = () => dispatch =>{
@@ -24,6 +27,12 @@ export const getAllGames = () => dispatch =>{
                         payload:json
                     })
                 })
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
+                    })
+                })
 }
 
 export const getAllGenres = () => dispatch =>{
@@ -32,8 +41,14 @@ export const getAllGenres = () => dispatch =>{
                 .then(r => r.json())
                 .then(json =>{
                     dispatch({
-                        type:  GET_GENRES,
+                        type:GET_GENRES,
                         payload:json.data
+                    })
+                })
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
                     })
                 })
 }
@@ -45,6 +60,12 @@ export const getAllPlatforms = () => dispatch => {
                     dispatch({
                         type: GET_PLATFORMS,
                         payload: json.data
+                    })
+                })
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
                     })
                 })
 }
@@ -59,11 +80,17 @@ export const getByName = (name) => dispatch =>{
                         payload:json.data
                     })
                 })
+                .catch(error =>{
+                    //setear el error en un estado de redux!!
+                    dispatch({
+                        type: ERRORS,
+                        payload:error
+                    })
+                })
 }
 
-
-
 export const getDetailGame = (id) => dispatch => {
+
     return fetch(`http://localhost:3002/videogames/${id}`)
                 .then(r => r.json())
                 .then(json => {
@@ -72,8 +99,13 @@ export const getDetailGame = (id) => dispatch => {
                         payload: json.data
                     })
                 })
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
+                    })
+                })
 }
-
 
 export const getDataBase = (id) => dispatch => {
     return fetch(`http://localhost:3002/videogames/database`)
@@ -84,8 +116,14 @@ export const getDataBase = (id) => dispatch => {
                         payload: json.data
                     })
                 })
-            }
-            
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
+                    })
+                })
+}
+
 export const deleteGameDB = (id) => dispatch => {
     return axios.delete(`http://localhost:3002/videogames/${id}`)
                 .then(json => {
@@ -94,8 +132,17 @@ export const deleteGameDB = (id) => dispatch => {
                         payload: json.data.data
                     })
                 })
-            }
+                .catch(error => {
+                    dispatch({
+                        type: ERRORS,
+                        payload: error
+                    })
+                })
+}
+
+
 ///--------------------------------------------- Local Actions  ---------------------------------------------------------------/// 
+
 
 export const byFilter = (payload) => dispatch =>{
         dispatch({
@@ -124,6 +171,15 @@ export const deleteGameApi = (id) => dispatch =>{
             payload: id
         })
 }
+
+export const clearstate = (state) => dispatch =>{
+    dispatch({
+        type: RESET_STATE,
+        payload: state
+    })
+} 
+
+
 
 
 

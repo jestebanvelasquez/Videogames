@@ -27,13 +27,18 @@ const {
 //     "genres": [1,3,5]
 // }
 router.post('/', async(req, res, next) => {
+    const { name, description, released, rating, image, platforms, genres } = req.body;
     try {
-        const { name, description, released, rating, image, platforms, genres } = req.body;
-        const newGame = await postGame(name.trim().replace(/\s\s+/g, ' '), description, released, rating, image, platforms, genres)
-        res.status(200).json({ data: newGame });
-
+        const byName = await getByName(name)
+        if(byName.length){
+            res.status(400).json({message: ` El Videojuego Con Nombre ${name} Ya Existe! ` })
+        }else {
+            const newGame = await postGame(name.trim().replace(/\s\s+/g, ' '), description, released, rating, image, platforms, genres)
+            res.status(200).json({ data: ` El Videojuego ${name} Creado Correctamente ` });
+        }
     } catch (error) {
-        next(error)
+        // next(error)
+        return {error: `el videojuego con nombre ${name} ya existe`}
     }
 })
 

@@ -1,26 +1,24 @@
 import React,{ useEffect, useState} from 'react';
-import { useSelector} from 'react-redux';
 import Pagination from '../Pagination/Pagination';
 
 
-export default function VideoGames() {
+export default function VideoGames({dataGames}) {
     const gamesxPage = 15;
-    const allGames = useSelector(state => state.allGames);
-    const [state, setState] = useState(allGames);
+    const [state, setState] = useState(dataGames);
     const [games, setGames] = useState([...state].splice(0, gamesxPage));
     const [page, setPage] = useState(0);
     
     useEffect(()=>{
-        setState(allGames)
+        setState(dataGames)
         setGames([...state].splice(0, gamesxPage))
         setPage(0)
-    },[allGames, state,])
+    },[dataGames, state,])
 
-    //Paginacion:
+    // Paginacion:
 
-    const allpages = Math.round(state.length  / 15)
+    const totalPages = Math.ceil(state.length  / 15)
     const nextHandler = () =>{
-        const vGames = Math.round(state.length / 15)
+        const vGames = Math.ceil(state.length / 15)
         const nextPage = page + 1;
         const index = nextPage * gamesxPage;
         if(page === vGames -1  ) return;
@@ -29,12 +27,22 @@ export default function VideoGames() {
     }
 
     const prevHandler = () =>{
-        const prevPage = page -1;
+        const prevPage = page-1 // -1; 3 -1 =  2 //gamesactual = 45
         if( prevPage < 0) return;
-        const index = prevPage * gamesxPage;
+        const index = prevPage * gamesxPage; //2 * 15 = 30
         setGames([...state].splice(index, gamesxPage))
         setPage(prevPage)
     }
 
-    return <Pagination games={games}  prevHandler={prevHandler} nextHandler={nextHandler} page={page+1} allpages={allpages}  />
+    return (
+        <div>
+            <Pagination 
+                games={games}  
+                prevHandler={prevHandler} 
+                nextHandler={nextHandler} 
+                page={page+1} 
+                allpages={totalPages}  
+            />
+        </div>
+    ) 
 }
