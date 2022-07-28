@@ -28,7 +28,7 @@ export default function Footer() {
 
 
       <div className={styles.footerContent}>
-        <img src={github} alt="logo-github" />
+        <img src={github} alt="logo-giithub" />
         <p>jestebanvelasquez</p>
       </div>
 
