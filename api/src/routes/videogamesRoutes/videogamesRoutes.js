@@ -19,6 +19,7 @@ const {
 
 //Routes:
 //"released": "23/03/2017",
+
 //----------------------------- Post: http://localhost:3002/videogames----------------------------
 
 router.post('/', async(req, res, next) => {
@@ -77,7 +78,6 @@ router.get('/name', async(req, res, next) => {
     try {
         const { name } = req.query;
 
-        console.log(name)
         const byName = await getByName(name);
         res.status(200).json({ data: byName })
 
@@ -91,18 +91,16 @@ router.get('/name', async(req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const { id } = req.params;
+        console.log(id)
+        console.log(id)
         const byId = await getId(id)
-        console.log(byId)
         res.status(200).json({ data: byId })
     } catch (error) {
         next(error)
     }
 })
 
-router.get('/:id', (req, res, next ) => {
-    
 
-})
 
 
 

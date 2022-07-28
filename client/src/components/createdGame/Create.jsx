@@ -126,11 +126,15 @@ export default function Create() {
     }
 
     const onChangefilterby = (e) => {
-        
+        console.log(e)
+        console.log(e.id)
+        console.log(e.value)
+
         setInput(() => {
-            let platformsId = [...input.platforms, e.target.id] 
+
+            let platformsId = [...input.platforms, e.id] 
                 platformsId = [...new Set(platformsId)]
-            let platformsfilterName = [...input.platformsName, e.target.value ]
+            let platformsfilterName = [...input.platformsName, e.value ]
                 platformsfilterName = [...new Set(platformsfilterName)]
             return {
                     ...input,
@@ -140,16 +144,16 @@ export default function Create() {
         })
         let errorsResult = Validate({
             ...input,
-            platforms:[ e.target.value],
+            platforms:[ e.value],
         })
         setErrors(errorsResult)
     }
 
     const onChangeGenres = (e) => {
         setInput(() => {
-            let genresId = [...input.genres, e.target.id] 
+            let genresId = [...input.genres, e.id] 
                 genresId = [...new Set(genresId)]
-            let genresFilterName = [...input.genresName, e.target.value]
+            let genresFilterName = [...input.genresName, e.value]
                 genresFilterName = [...new Set(genresFilterName)]
                 return {
                     ...input,
@@ -159,7 +163,7 @@ export default function Create() {
         })
         let errorsResult = Validate({
             ...input,
-            genres: [e.target.value]
+            genres: [e.value]
         })
         setErrors(errorsResult)
     }
@@ -256,7 +260,7 @@ export default function Create() {
             <div className={styles.containerCreate}>
                 <div className={styles.preview}>
                     <div className={styles.filters}>
-                        <div key={input.id}>
+                        <div key={input.id}   >
                             <Preview
                                 id={input.id}
                                 input={input}

@@ -277,22 +277,38 @@ const getId = async(id) => {
 
 }
 
-const validateName = async (name) => {
-    name = name.toLowerCase();
+const ordenRating = async (num) => {
     try {
+        const byIdApi = await getApi()
+        const byIdBD = await getBb()
+        let  allGames = [byIdBD,...byIdApi]
         
-        const validateN = await Videogame.findAll({
-            where : {
-                name:{name}
-            }
-        })
-        return validateN
-    } catch (error) {   
-        return error;
+        
+        ratingMenor = allGames.filter( el => el.rating < num)
+        ratingMayor = allGames.filter(el => el.rating > num)
+        if(ratingMenor.length > 1){
+            return { response: 'ratingMenor', data: ratingMenor}
+        }else if (ratingMayor.length > 1 ){
+            return {response: 'ratingMayor', data: ratingMayor}
+        }else {
+            return {message: 'no se encontraron ratings menores o mayores al numero pasado '}
+        }
+
+        
+
+    } catch (error) {
+        
     }
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
 //probando expressValidator:
@@ -338,7 +354,7 @@ module.exports = {
     byNameDb,
     byNameApi,
     deleteGameBD,
-    validateName,
+    
     // createItem
 
 }
@@ -357,29 +373,32 @@ module.exports = {
 // rating,
 // image,
 //         }, {
-//             where: {
-//                 id: id
-//             }
-//         })
+    //             where: {
+        //                 id: id
+        //             }
+        //         })
+        
+        //         res.status(200).json({ data: game })
+        
+        //     } catch (error) {
+            //         next(error);
+            //     }
+            // })
+            
+            // //-------------------------------- Delete/:id = http://localhost:3002/dogs/idDb --------------------------------//
+            
+            // router.delete('/:id', async (req, res, next) => {
+                //     const id = req.params.id
+                //     try {
+                    //         await Dog.destroy({
+                        //             where: { id }
+                        //         })
+                        //         res.status(204).json({ data: 'ok' })
+                        
+                        //     } catch (error) {
+                            //         next(error)
+                            //     }
+                            // })
 
-//         res.status(200).json({ data: game })
 
-//     } catch (error) {
-//         next(error);
-//     }
-// })
 
-// //-------------------------------- Delete/:id = http://localhost:3002/dogs/idDb --------------------------------//
-
-// router.delete('/:id', async (req, res, next) => {
-//     const id = req.params.id
-//     try {
-//         await Dog.destroy({
-//             where: { id }
-//         })
-//         res.status(204).json({ data: 'ok' })
-
-//     } catch (error) {
-//         next(error)
-//     }
-// })

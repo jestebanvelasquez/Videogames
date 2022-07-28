@@ -8,7 +8,7 @@ export default function LandingPage() {
     const history = useHistory()
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(getAllGames())
+        // dispatch(getAllGames())
         dispatch(getAllGenres())
     },[])
 

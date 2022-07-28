@@ -1,15 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteGameApi, deleteGameDB, getDetailGame} from '../../redux/actions/root-actions'
 import style from './Game.module.css'
 import Swal from "sweetalert2";
-// import { useHistory } from 'react-router-dom'
 
 
 export default function Game(props) {
     const dispatch = useDispatch()
-    // const history = useHistory()
 
 
     // const update = () => { //probando update
@@ -17,6 +15,9 @@ export default function Game(props) {
     //     history.push('/home/create')
     // }
 
+
+
+    
 
 
 
@@ -64,7 +65,7 @@ export default function Game(props) {
                 <img className={style.cardImage} src={props.image} alt="logo" />
                 <div className={style.cardInfo}>
                     <Link to={`/home/detail/${props.id}`}>
-                        <h1 className={style.title}>{props.name}</h1>
+                        <h1 className={style.title} >{props.name }  </h1>
                     </Link>
                         <span className={style.genres}>Generos :</span>
                     {
@@ -82,8 +83,8 @@ export default function Game(props) {
                                 </div> ) : null
                         }
                     </div> */}
-                    <div>
-                        <button onClick={deleteGame}> X </button>
+                    <div className={style.containerBton}>
+                        <button className={style.bton} onClick={deleteGame}> X </button>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import allImages from './slider'
 import style from './Header.module.css'
 import {ReactComponent as ArrowRigth} from '../../../assets/icons/right.svg'
 import {ReactComponent as ArrowLeft} from '../../../assets/icons/left.svg'
-
+import Loading from '../../Loading/Loading'
 
 
 export default function Header(props) {
@@ -56,11 +56,13 @@ export default function Header(props) {
 
     return (
         <div className={style.container}  >
+        {
+                !state ? <Loading/>  :
             <div className={style.slideShow}>
-                        <div className= {style.slide} key = {state.position}>
-                            <img src= {state.img ? state.img : 'logo'  } alt='logo'/>
-                        </div>
-                    )
+                <div className= {style.slide} key = {state.position}>
+                    <img src= {state.img ? state.img : 'logo'  } alt='logo'/>
+                </div>
+                    
                 <div className={style.textSlide}>
                     <h1> {props.title}</h1>
                 </div> 
@@ -70,7 +72,7 @@ export default function Header(props) {
                     <button className={`${style.btn} ${style.rigth}`} onClick={next}> <ArrowRigth /> </button>
                 </div>
             </div>
-
+        }
         </div>
     )
 }

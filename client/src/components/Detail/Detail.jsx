@@ -20,6 +20,7 @@ export default function Detail() {
     }, [dispatch, params])
     
     useEffect(() => {
+        
         return () => {
             dispatch(clearstate('byId'))
         }

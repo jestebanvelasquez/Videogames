@@ -1,34 +1,23 @@
 import React from 'react'
 import style from './Filter.module.css'
+import Select from 'react-select';
 
-//necessary: state, filterby, onchange, onChangeGenres, handleSubmit
 export default function Filter(props) {
 
 
 
     return (
         <div className={style.filtersContain}  >
-
-            {
-                props.filterBy.map((filter) =>{
-                    return (
-                        <div className={style.filter} key={filter.id} >
-
-                            <button
-                                className={style.bton}
-                                name={filter.name}
-                                type={'submit'}
-                                id={filter.id} 
-                                value={filter.name}
-                                onClick={(e) => props.onChangefilterby(e)}
-                            >
-                                {filter.name}
-                            </button>
-
-                        </div>
-                    )}) 
-                }                 
+            <Select
+                key={props.filterBy.map(el => el.id)}
+                defaultValue={ { label: 'select the filters name', value: 'empty' }} 
+                options={props.filterBy.map(elemnt => ({label: elemnt.name, value:elemnt.name, id: elemnt.id}))}
+                onChange={(e) => props.onChangefilterby(e)}
+            /> 
         </div>
     )
 }
+
+
+
 

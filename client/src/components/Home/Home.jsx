@@ -29,14 +29,14 @@ export default function Home() {
     }, [allGenres, dataGames]);
 
     const onChangeGenres = (e) => {
-        const name = e.target.value;
+        const name = e.value;
         dispatch(byGenre(name));
         setTitle(name);
     };
 
     const onChangefilterby = (e) => {
-        const id = e.target.id;
-        const name = e.target.value;
+        const id = e.id;
+        const name = e.value;
         setTitle(name);
         dispatch(byFilter(id));
     };
@@ -61,20 +61,23 @@ export default function Home() {
             <Link to="/home/create">
                 <button className={style.btn}>¡ Create !</button>
             </Link>
-            <div className={style.filter1}>
-                <div className={style.title}>
-                    <h1> Filtro Aplicado: {title}</h1>  
-                </div>
-                <Filter
-                    filterBy={filterByOrder}
-                    onChangefilterby={onChangefilterby}
-                />
-            </div>
+                    <div className={style.title}>
+                        <h1> Filtro Aplicado: {title}</h1>
+                    </div>
 
-            <div className={style.filter2}>
-                <Filter
-                    filterBy={stateGenres} 
-                    onChangefilterby={onChangeGenres} />
+            <div className= {style.containerFilters}>
+                <div className={style.filter1}>
+                    <Filter
+                        filterBy={filterByOrder}
+                        onChangefilterby={onChangefilterby}
+                    />
+                </div>
+
+                <div className={style.filter2}>
+                    <Filter
+                        filterBy={stateGenres}
+                        onChangefilterby={onChangeGenres} />
+                </div>
             </div>
 
             <div className={style.games}>
